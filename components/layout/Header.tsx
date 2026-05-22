@@ -19,15 +19,15 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 h-20 sm:h-24 flex items-center justify-between">
         <Link href="/" className="flex items-center" aria-label="ECO RIDE - Accueil">
           <Image
-            src={asset("/brand/ecoride-full-sdl-blue.svg")}
+            src={asset("/brand/ecoride-icon-blue.svg")}
             alt="ECO RIDE - Solution de Location"
-            width={340}
-            height={137}
+            width={96}
+            height={96}
             priority
-            className="h-16 w-auto max-w-[280px] object-contain sm:h-20 sm:max-w-[400px]"
+            className="h-20 w-20 object-contain sm:h-28 sm:w-28"
           />
         </Link>
 
