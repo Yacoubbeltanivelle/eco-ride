@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { vehicles } from "@/data/vehicles";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://ecoride.pro";
 
