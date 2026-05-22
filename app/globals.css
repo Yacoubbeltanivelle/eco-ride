@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+  --eco-black: #050706;
+  --eco-ink: #0B0F0D;
+  --eco-charcoal: #111715;
+  --eco-graphite: #1B211F;
+  --eco-mint-bg: #EFF7F1;
+  --eco-mint-soft: #DDEFE4;
+  --eco-mint-card: #F7FBF8;
+  --eco-green: #0F6B3A;
+  --eco-green-deep: #073B22;
+  --eco-green-neon: #49E58C;
+  --eco-blue: #39BDEB;
+  --eco-blue-soft: #BFEFFF;
+  --eco-white: #FFFFFF;
+  --eco-muted: #8A938E;
+  --eco-border: rgba(255,255,255,0.12);
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --radius-panel: 32px;
+}
+
+@theme inline {
+  --color-background: var(--eco-mint-bg);
+  --color-foreground: var(--eco-ink);
+  --font-sans: "Inter", "Sora", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--eco-mint-bg);
+  color: var(--eco-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.eco-glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.eco-dark-glass {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Scrollbar slim */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 999px; }
+
+/* Mobile bottom nav safe area */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+
+/* Animations */
+@keyframes eco-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes eco-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes eco-slide-right {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes eco-bento-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes eco-typewriter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-up   { animation: eco-fade-up 0.5s ease-out forwards; }
+.animate-fade-in   { animation: eco-fade-in 0.4s ease-out forwards; }
+.animate-slide-right { animation: eco-slide-right 0.4s ease-out forwards; }
+.animate-bento-in  { animation: eco-bento-in 0.6s ease-out forwards; }

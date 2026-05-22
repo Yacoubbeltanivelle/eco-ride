@@ -1,0 +1,63 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run build)",
+      "Bash(npm run lint)",
+      "Bash(npm run start)",
+      "Bash(npm install)",
+      "Bash(npm install --save *)",
+      "Bash(npm install --save-dev *)",
+      "Bash(npm uninstall *)",
+      "Bash(npm list *)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx tsc --noEmit *)",
+      "Bash(npx next *)",
+      "Bash(npx shadcn *)",
+      "Bash(npx eslint *)",
+      "Bash(npx prettier *)",
+      "Bash(npx playwright *)",
+      "Bash(curl -s -o /dev/null -w * http://localhost:3001*)",
+      "Bash(curl -s http://localhost:3001*)",
+      "Bash(curl -I http://localhost:3001*)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "Bash(git branch *)",
+      "Bash(git checkout *)",
+      "Bash(git stash *)",
+      "Read(//f/PojetDev/projetECORIDE/**)",
+      "Read(//F/Carriere/Business2026/ClientPlus/SiteClientPlus/public/demos/EcorideSITE/**)",
+      "Skill(ecoride-*)",
+      "Skill(shadcn)",
+      "Skill(performance)",
+      "Skill(fixing-accessibility)",
+      "Skill(web-design-guidelines)",
+      "Skill(nextjs-app-router-patterns)",
+      "Skill(tailwind-design-system)",
+      "Skill(framer-motion-animator)",
+      "Skill(verify)",
+      "Skill(simplify)"
+    ],
+    "additionalDirectories": [
+      "F:\\Carriere\\Business2026\\ClientPlus\\SiteClientPlus\\public\\demos\\EcorideSITE",
+      "f:\\PojetDev\\projetECORIDE\\EcorideSITE-1"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"f:\\PojetDev\\projetECORIDE\\EcorideSITE\\.claude\\hooks\\skill-router-reminder.ps1\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

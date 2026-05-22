@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 98" role="img" aria-label="ECO RIDE – Solution de Location">
+  <!-- Icon mark — white -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter">
+    <rect x="6" y="5" width="64" height="72"/>
+    <line x1="6" y1="41" x2="70" y2="41"/>
+    <line x1="-8" y1="-4" x2="84" y2="88"/>
+  </g>
+  <!-- ECO RIDE -->
+  <text x="90" y="56"
+    font-family="'Arial Black', Impact, 'Arial Bold', sans-serif"
+    font-weight="900"
+    font-size="50"
+    textLength="258"
+    lengthAdjust="spacingAndGlyphs"
+    fill="#FFFFFF">ECO RIDE</text>
+  <!-- SOLUTION DE LOCATION -->
+  <text x="90" y="80"
+    font-family="Arial, 'Helvetica Neue', sans-serif"
+    font-weight="400"
+    font-size="16"
+    textLength="258"
+    lengthAdjust="spacingAndGlyphs"
+    fill="rgba(255,255,255,0.65)">SOLUTION DE LOCATION</text>
+</svg>
