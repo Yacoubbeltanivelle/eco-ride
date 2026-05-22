@@ -151,7 +151,7 @@ export default function LocationVtcPage() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 50% -5%, rgba(73,229,140,0.18), transparent)",
+              "radial-gradient(ellipse 70% 50% at 50% -5%, rgba(57,189,235,0.18), transparent)",
           }}
         />
 
@@ -159,7 +159,7 @@ export default function LocationVtcPage() {
           {/* Badge */}
           <span
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
-            style={{ background: "rgba(73,229,140,0.1)", color: "var(--eco-green-neon)" }}
+            style={{ background: "rgba(57,189,235,0.1)", color: "var(--eco-green-neon)" }}
           >
             <Car className="w-3.5 h-3.5" />
             Pour chauffeurs VTC et professionnels
@@ -287,7 +287,7 @@ export default function LocationVtcPage() {
                     ? "2px solid var(--eco-green-neon)"
                     : "1px solid var(--eco-mint-soft)",
                   boxShadow: f.best
-                    ? "0 8px 40px rgba(73,229,140,0.12)"
+                    ? "0 8px 40px rgba(57,189,235,0.12)"
                     : "0 2px 8px rgba(0,0,0,0.04)",
                 }}
               >
@@ -699,7 +699,7 @@ export default function LocationVtcPage() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 60% 70% at 50% 110%, rgba(73,229,140,0.12), transparent)",
+              "radial-gradient(ellipse 60% 70% at 50% 110%, rgba(57,189,235,0.12), transparent)",
           }}
         />
         <div className="relative max-w-2xl mx-auto text-center">

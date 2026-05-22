@@ -8,14 +8,15 @@
   "theme_color": "#0F6B3A",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
-      "sizes": "192x192",
+      "src": "/brand/ecoride-icon-blue.png",
+      "sizes": "1206x1180",
       "type": "image/png"
     },
     {
-      "src": "/icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/brand/ecoride-icon-blue.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

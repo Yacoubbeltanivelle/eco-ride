@@ -76,9 +76,9 @@ export default function AchatOccasionPage() {
             transition={{ duration: 0.4 }}
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide uppercase"
             style={{
-              background: "rgba(73,229,140,0.12)",
+              background: "rgba(57,189,235,0.12)",
               color: "var(--eco-green-neon)",
-              border: "1px solid rgba(73,229,140,0.25)",
+              border: "1px solid rgba(57,189,235,0.25)",
             }}
           >
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "var(--eco-green-neon)" }} />

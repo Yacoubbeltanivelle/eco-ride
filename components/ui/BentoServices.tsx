@@ -79,7 +79,7 @@ export default function BentoServices() {
           <div className="relative z-10 p-6 flex flex-col h-full min-h-[280px]">
             {badge && (
               <span className="self-start px-2.5 py-1 rounded-full text-xs font-bold mb-4"
-                style={{ background: "rgba(73,229,140,0.15)", color: "var(--eco-green-neon)", border: "1px solid rgba(73,229,140,0.3)" }}>
+                style={{ background: "rgba(57,189,235,0.15)", color: "var(--eco-green-neon)", border: "1px solid rgba(57,189,235,0.3)" }}>
                 {badge}
               </span>
             )}

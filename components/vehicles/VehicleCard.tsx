@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -154,7 +154,7 @@ export default function VehicleCard({ vehicle, index = 0, listView = false }: Pr
         {/* Eco badge */}
         {vehicle.isEcoHighlighted && (
           <div className="absolute top-3 right-10">
-            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-white/90 text-emerald-700 shadow backdrop-blur-sm">🌿 Éco</span>
+            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-white/90 text-sky-700 shadow backdrop-blur-sm">🌿 Éco</span>
           </div>
         )}
 

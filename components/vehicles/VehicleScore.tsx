@@ -77,7 +77,7 @@ export default function VehicleScore({ score, compact = false }: Props) {
                       ? "var(--eco-green-neon)"
                       : val >= 3
                       ? "var(--eco-green)"
-                      : "rgba(15,107,58,0.4)",
+                      : "rgba(20,121,189,0.4)",
                   }}
                 />
               </div>

@@ -8,14 +8,20 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           <div>
-            <div className="mb-4">
+            <div className="mb-4 flex items-center gap-3">
               <Image
-                src="/logo-full-sdl-white.svg"
-                alt="ECO RIDE - Solution de Location"
-                width={220}
-                height={46}
-                className="h-[46px] w-auto max-w-[220px] object-contain"
+                src="/brand/ecoride-icon-blue.svg"
+                alt=""
+                width={52}
+                height={51}
+                className="h-[52px] w-[52px] object-contain"
               />
+              <div>
+                <p className="text-xl font-black tracking-normal text-white">ECO RIDE</p>
+                <p className="text-[11px] font-medium uppercase tracking-normal text-sky-300">
+                  Solution de location
+                </p>
+              </div>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
               Vente, location et mandataire automobile. Une mobilité plus simple, plus fiable, plus responsable.

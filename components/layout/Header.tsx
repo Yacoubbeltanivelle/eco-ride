@@ -21,23 +21,23 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center" aria-label="ECO RIDE - Accueil">
           <Image
-            src="/logo-full.png"
-            alt="ECO RIDE"
-            width={170}
-            height={36}
+            src="/brand/ecoride-full-sdl-blue.svg"
+            alt="ECO RIDE - Solution de Location"
+            width={220}
+            height={89}
             priority
-            className="h-9 w-auto max-w-[170px] object-contain"
+            className="h-10 w-auto max-w-[190px] object-contain sm:max-w-[220px]"
           />
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700">
           {navLinks.map(l => (
-            <Link key={l.href} href={l.href} className="hover:text-emerald-600 transition-colors">{l.label}</Link>
+            <Link key={l.href} href={l.href} className="hover:text-sky-500 transition-colors">{l.label}</Link>
           ))}
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <a href="tel:+33100000000" className="flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-emerald-600">
+          <a href="tel:+33100000000" className="flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-sky-500">
             <Phone className="w-4 h-4" />
             01 00 00 00 00
           </a>

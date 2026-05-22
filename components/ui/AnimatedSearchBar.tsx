@@ -65,7 +65,7 @@ export default function AnimatedSearchBar({ dark = false }: Props) {
     ? "rgba(255,255,255,0.08)"
     : "rgba(255,255,255,0.95)";
   const border = dark
-    ? focused ? "1px solid rgba(73,229,140,0.6)" : "1px solid rgba(255,255,255,0.15)"
+    ? focused ? "1px solid rgba(57,189,235,0.6)" : "1px solid rgba(255,255,255,0.15)"
     : focused ? "1px solid var(--eco-green)" : "1px solid rgba(0,0,0,0.1)";
   const textColor = dark ? "#FFFFFF" : "var(--eco-ink)";
   const placeholderColor = dark ? "rgba(255,255,255,0.4)" : "#9CA3AF";
@@ -73,7 +73,7 @@ export default function AnimatedSearchBar({ dark = false }: Props) {
   return (
     <form onSubmit={handleSubmit} className="relative w-full max-w-xl">
       <motion.div
-        animate={{ boxShadow: focused ? (dark ? "0 0 0 3px rgba(73,229,140,0.15)" : "0 0 0 3px rgba(15,107,58,0.12)") : "none" }}
+        animate={{ boxShadow: focused ? (dark ? "0 0 0 3px rgba(57,189,235,0.15)" : "0 0 0 3px rgba(20,121,189,0.12)") : "none" }}
         transition={{ duration: 0.2 }}
         className="flex items-center gap-3 px-4 py-3.5 rounded-2xl"
         style={{ background: bg, border, backdropFilter: "blur(20px)" }}

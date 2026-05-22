@@ -90,7 +90,7 @@ export default function MandataireAutoPage() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(15,107,58,0.28) 0%, transparent 70%)",
+              "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(20,121,189,0.28) 0%, transparent 70%)",
           }}
         />
 
@@ -99,9 +99,9 @@ export default function MandataireAutoPage() {
           <span
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-5"
             style={{
-              background: "rgba(73,229,140,0.12)",
+              background: "rgba(57,189,235,0.12)",
               color: "var(--eco-green-neon)",
-              border: "1px solid rgba(73,229,140,0.25)",
+              border: "1px solid rgba(57,189,235,0.25)",
             }}
           >
             <Search className="w-3 h-3" />
@@ -339,7 +339,7 @@ export default function MandataireAutoPage() {
         >
           <div
             className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
-            style={{ background: "rgba(73,229,140,0.12)" }}
+            style={{ background: "rgba(57,189,235,0.12)" }}
           >
             <Building2 className="w-6 h-6" style={{ color: "var(--eco-green-neon)" }} />
           </div>

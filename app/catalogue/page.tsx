@@ -232,7 +232,7 @@ function CatalogueContent() {
             {/* Search bar */}
             <div
               className="flex-1 flex items-center gap-2 px-3.5 py-2.5 rounded-2xl bg-white border transition-all duration-200"
-              style={{ borderColor: searchFocused ? "var(--eco-green)" : "#E5E7EB", boxShadow: searchFocused ? "0 0 0 3px rgba(15,107,58,0.08)" : "none" }}
+              style={{ borderColor: searchFocused ? "var(--eco-green)" : "#E5E7EB", boxShadow: searchFocused ? "0 0 0 3px rgba(20,121,189,0.08)" : "none" }}
             >
               <Search className="w-4 h-4 text-gray-400 shrink-0" />
               <input

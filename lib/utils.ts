@@ -1,4 +1,4 @@
-import { type ClassValue, clsx } from "clsx";
+﻿import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -23,7 +23,7 @@ export const fuelLabels: Record<string, string> = {
 export const fuelColors: Record<string, string> = {
   essence: "bg-orange-100 text-orange-700",
   diesel: "bg-slate-100 text-slate-700",
-  hybride: "bg-emerald-100 text-emerald-700",
+  hybride: "bg-sky-100 text-sky-700",
   electrique: "bg-blue-100 text-blue-700",
 };
 

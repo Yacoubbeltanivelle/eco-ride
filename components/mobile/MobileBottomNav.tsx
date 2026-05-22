@@ -38,7 +38,7 @@ export default function MobileBottomNav() {
                 <motion.span
                   layoutId="eco-nav-indicator"
                   className="absolute inset-0 rounded-xl"
-                  style={{ background: "rgba(73,229,140,0.12)", border: "1px solid rgba(73,229,140,0.25)" }}
+                  style={{ background: "rgba(57,189,235,0.12)", border: "1px solid rgba(57,189,235,0.25)" }}
                   transition={{ type: "spring", stiffness: 400, damping: 35 }}
                 />
               )}

@@ -100,7 +100,7 @@ const statusConfig = {
   available: {
     label: "Disponible",
     icon: CheckCircle2,
-    color: "text-[#0F6B3A]",
+    color: "text-[#1479BD]",
   },
   reserved: {
     label: "Réservé",
@@ -126,7 +126,7 @@ function CellValue({ row, vehicle }: { row: RowDef; vehicle: Vehicle }) {
     return (
       <span
         className={`inline-flex items-center gap-1 text-sm font-semibold ${
-          yes ? "text-[#0F6B3A]" : "text-[#8A938E]"
+          yes ? "text-[#1479BD]" : "text-[#8A938E]"
         }`}
       >
         {yes ? (
@@ -191,7 +191,7 @@ export default function ComparerPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#0F6B3A] mb-2">
+          <p className="text-xs font-semibold tracking-widest uppercase text-[#1479BD] mb-2">
             ECO RIDE
           </p>
           <h1 className="text-3xl font-extrabold tracking-tight text-[#050706] leading-tight">
@@ -234,14 +234,14 @@ export default function ComparerPage() {
                 disabled={isDisabled}
                 whileHover={isDisabled ? {} : { y: -2 }}
                 whileTap={isDisabled ? {} : { scale: 0.97 }}
-                className={`relative p-2.5 rounded-2xl border-2 text-left transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F6B3A] ${
+                className={`relative p-2.5 rounded-2xl border-2 text-left transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1479BD] ${
                   isSelected
-                    ? "border-[#0F6B3A] bg-[#EFF7F1]"
-                    : "border-[#DDEFE4] bg-white"
+                    ? "border-[#1479BD] bg-[#EBF5FB]"
+                    : "border-[#CCE9F7] bg-white"
                 } ${isDisabled ? "opacity-40 cursor-not-allowed" : ""}`}
               >
                 {/* thumbnail */}
-                <div className="relative h-14 rounded-xl overflow-hidden bg-[#DDEFE4] mb-2.5">
+                <div className="relative h-14 rounded-xl overflow-hidden bg-[#CCE9F7] mb-2.5">
                   <Image
                     src={v.images[0]}
                     alt={`${v.brand} ${v.model}`}
@@ -290,17 +290,17 @@ export default function ComparerPage() {
               className="bg-white rounded-3xl overflow-hidden"
               style={{
                 border: "1.5px solid var(--eco-mint-soft)",
-                boxShadow: "0 2px 24px rgba(15,107,58,0.06)",
+                boxShadow: "0 2px 24px rgba(20,121,189,0.06)",
               }}
             >
               {/* scroll hint on mobile */}
               <div className="flex items-center justify-center gap-2 px-4 py-2.5 md:hidden"
                 style={{ background: "var(--eco-mint-soft)" }}>
-                <ArrowRight className="w-3.5 h-3.5 text-[#0F6B3A] rotate-180 flex-shrink-0" />
-                <span className="text-xs font-semibold text-[#0F6B3A] tracking-wide">
+                <ArrowRight className="w-3.5 h-3.5 text-[#1479BD] rotate-180 flex-shrink-0" />
+                <span className="text-xs font-semibold text-[#1479BD] tracking-wide">
                   Faites glisser pour voir tout le tableau
                 </span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#0F6B3A] flex-shrink-0" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#1479BD] flex-shrink-0" />
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[420px]">
@@ -379,7 +379,7 @@ export default function ComparerPage() {
                             colSpan={selected.length + (selected.length < 3 ? 2 : 1)}
                             className="px-5 py-2"
                           >
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#0F6B3A]">
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#1479BD]">
                               {group.label}
                             </span>
                           </td>
@@ -450,7 +450,7 @@ export default function ComparerPage() {
                 className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
                 style={{ background: "var(--eco-mint-soft)" }}
               >
-                <ChevronDown className="w-6 h-6 text-[#0F6B3A]" />
+                <ChevronDown className="w-6 h-6 text-[#1479BD]" />
               </div>
               <p className="text-[#050706] font-semibold text-base mb-1">
                 Sélectionnez{" "}

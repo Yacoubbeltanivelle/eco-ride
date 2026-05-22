@@ -98,13 +98,13 @@ export default function TestimonialSlider({ items, autoPlay = true, interval = 5
         <div className="flex gap-2">
           <button
             onClick={() => go(-1)}
-            className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-200 bg-white hover:border-emerald-500 transition-colors"
+            className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-200 bg-white hover:border-sky-400 transition-colors"
           >
             <ChevronLeft className="w-4 h-4 text-gray-600" />
           </button>
           <button
             onClick={() => go(1)}
-            className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-200 bg-white hover:border-emerald-500 transition-colors"
+            className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-200 bg-white hover:border-sky-400 transition-colors"
           >
             <ChevronRight className="w-4 h-4 text-gray-600" />
           </button>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { User, FileText, Calendar, Heart, Car, ArrowRight } from "lucide-react";
 
@@ -47,9 +47,9 @@ export default function EspaceClientPage() {
             { icon: Calendar, label: "Mes RDV", active: false },
             { icon: Heart, label: "Favoris", active: false },
           ].map(({ icon: Icon, label, active }) => (
-            <div key={label} className={`flex flex-col items-center gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${active ? "border-emerald-500 bg-emerald-50" : "border-gray-200 bg-white"}`}>
-              <Icon className={`w-5 h-5 ${active ? "text-emerald-600" : "text-gray-400"}`} />
-              <span className={`text-xs font-semibold ${active ? "text-emerald-700" : "text-gray-600"}`}>{label}</span>
+            <div key={label} className={`flex flex-col items-center gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${active ? "border-sky-500 bg-sky-50" : "border-gray-200 bg-white"}`}>
+              <Icon className={`w-5 h-5 ${active ? "text-sky-600" : "text-gray-400"}`} />
+              <span className={`text-xs font-semibold ${active ? "text-sky-700" : "text-gray-600"}`}>{label}</span>
             </div>
           ))}
         </div>
@@ -64,9 +64,9 @@ export default function EspaceClientPage() {
                   <div>
                     <p className="font-bold text-gray-900">{r.vehicle}</p>
                     <p className="text-sm text-gray-500">{r.type} · {r.dateDebut} → {r.dateFin}</p>
-                    <p className="text-sm text-emerald-700 font-semibold">{r.prix}</p>
+                    <p className="text-sm text-sky-700 font-semibold">{r.prix}</p>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-bold ${r.status === "En cours" ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-600"}`}>
+                  <span className={`px-3 py-1 rounded-full text-xs font-bold ${r.status === "En cours" ? "bg-sky-100 text-sky-700" : "bg-gray-100 text-gray-600"}`}>
                     {r.status}
                   </span>
                 </div>

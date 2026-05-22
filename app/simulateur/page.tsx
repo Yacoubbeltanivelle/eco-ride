@@ -129,7 +129,7 @@ function OptionCard({
     >
       <div
         className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 transition-colors duration-200"
-        style={{ background: hovered ? "rgba(15,107,58,0.12)" : "var(--eco-mint-soft)" }}
+        style={{ background: hovered ? "rgba(20,121,189,0.12)" : "var(--eco-mint-soft)" }}
       >
         <Icon size={18} style={{ color: "var(--eco-green)" }} />
       </div>
