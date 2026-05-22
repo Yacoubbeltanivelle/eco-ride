@@ -109,7 +109,7 @@ export default function HomePage() {
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-2">
                 Choisissez votre formule
               </h2>
-              <p className="text-gray-400 mt-2">Location · Vente · Mandataire — tout ce dont vous avez besoin</p>
+              <p className="text-gray-400 mt-2">Location · Vente · Mandataire<br className="sm:hidden" /> — tout ce dont vous avez besoin</p>
             </div>
           </ScrollReveal>
           <BentoServices />
