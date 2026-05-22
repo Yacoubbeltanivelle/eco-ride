@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     output: "export",
     basePath: "/eco-ride",
     trailingSlash: true,
+    env: { NEXT_PUBLIC_BASE_PATH: "/eco-ride" },
   }),
   images: {
     unoptimized: isGitHubPages,

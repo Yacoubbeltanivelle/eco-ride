@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { asset } from "@/lib/utils";
 
 export default function Footer() {
   return (
@@ -10,7 +11,7 @@ export default function Footer() {
           <div>
             <div className="mb-4 flex items-center gap-3">
               <Image
-                src="/brand/ecoride-icon-blue.svg"
+                src={asset("/brand/ecoride-icon-blue.svg")}
                 alt=""
                 width={52}
                 height={51}

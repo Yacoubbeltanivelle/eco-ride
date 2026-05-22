@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { asset } from "@/lib/utils";
 
 const navLinks = [
   { href: "/catalogue", label: "Catalogue" },
@@ -21,7 +22,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center" aria-label="ECO RIDE - Accueil">
           <Image
-            src="/brand/ecoride-full-sdl-blue.svg"
+            src={asset("/brand/ecoride-full-sdl-blue.svg")}
             alt="ECO RIDE - Solution de Location"
             width={220}
             height={89}
