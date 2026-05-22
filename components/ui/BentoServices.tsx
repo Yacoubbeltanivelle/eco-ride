@@ -12,7 +12,7 @@ const services = [
     title: "Location VTC",
     sub: "Pour chauffeurs et professionnels",
     desc: "Assurance, entretien et assistance inclus. Démarrez ou développez votre activité VTC simplement.",
-    features: ["Assurance incluse", "Entretien inclus", "1 350 km/semaine", "Dès 269 €/sem HT"],
+    features: ["Assurance incluse", "Entretien inclus", "7 000 km / mois", "Dès 167 € HT / semaine"],
     cta: "Voir les véhicules",
     accent: "#49E58C",
     span: "lg:col-span-1",
