@@ -36,7 +36,7 @@ export const testimonials: Testimonial[] = [
     id: "5",
     nom: "Marc D.",
     role: "Mandataire client",
-    text: "ECO RIDE m'a trouvé une Toyota Corolla Hybride neuve à un prix inférieur à ce que j'avais trouvé en concession. Transparence totale sur les frais.",
+    text: "ECO RIDE m'a trouvé une Toyota Corolla Hybride d'occasion à un prix inférieur à ce que j'avais trouvé en concession. Transparence totale sur les frais.",
     rating: 5,
     vehicleUsed: "Toyota Corolla Hybride",
   },

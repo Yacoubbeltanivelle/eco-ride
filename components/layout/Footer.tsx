@@ -28,7 +28,7 @@ export default function Footer() {
               Vente, location et mandataire automobile. Une mobilité plus simple, plus fiable, plus responsable.
             </p>
             <div className="mt-4 flex flex-col gap-2 text-sm">
-              <a href="tel:+33100000000" className="flex items-center gap-2 hover:text-white"><Phone className="w-4 h-4" /> 01 00 00 00 00</a>
+              <a href="tel:+33667489562" className="flex items-center gap-2 hover:text-white"><Phone className="w-4 h-4" /> 06 67 48 95 62</a>
               <a href="mailto:contact@ecoride.pro" className="flex items-center gap-2 hover:text-white"><Mail className="w-4 h-4" /> contact@ecoride.pro</a>
               <span className="flex items-center gap-2"><MapPin className="w-4 h-4" /> 20 bis Rue Louis Philippe, 92200 Neuilly-sur-Seine</span>
             </div>

@@ -34,7 +34,7 @@ const engagements = [
     icon: Users,
     number: "03",
     title: "Accompagnement dédié",
-    desc: "Immatriculation, assurance, financement : nous vous guidons dans chaque démarche jusqu'à la remise des clés.",
+    desc: "Immatriculation, assurance, remise des clés : nous vous guidons dans chaque démarche.",
   },
 ];
 

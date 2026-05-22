@@ -81,7 +81,7 @@ export default function HomePage() {
                   style={{ background: "var(--eco-green)" }}>
                   Voir les véhicules <ArrowRight className="w-5 h-5" />
                 </Link>
-                <a href="https://wa.me/33100000000?text=Bonjour, je souhaite être recontacté par ECO RIDE."
+                <a href="https://wa.me/33667489562?text=Bonjour, je souhaite être recontacté par ECO RIDE."
                   target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold text-white text-base border border-white/20 transition-colors hover:bg-white/10"
                   style={{ background: "rgba(255,255,255,0.08)" }}>
@@ -241,7 +241,7 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3">Prêt à démarrer ?</h2>
             <p className="text-white/80 mb-8 text-lg">Contactez-nous dès maintenant. Réponse sous 24h.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+33100000000"
+              <a href="tel:+33667489562"
                 className="flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold transition-transform active:scale-95"
                 style={{ background: "white", color: "var(--eco-green)" }}>
                 <Phone className="w-5 h-5" /> Appeler maintenant

@@ -26,14 +26,14 @@ export default function StickyMobileCTA({ vehicleLabel, price }: Props) {
         )}
         <div className="flex gap-1 p-2">
           <a
-            href="tel:+33100000000"
+            href="tel:+33667489562"
             className="flex-1 flex items-center justify-center gap-1.5 rounded-xl py-3 text-white text-sm font-semibold cursor-pointer transition-opacity hover:opacity-80"
             style={{ background: "rgba(255,255,255,0.1)" }}
           >
             <Phone className="w-4 h-4" /> Appeler
           </a>
           <a
-            href={`https://wa.me/33100000000?text=${encodeURIComponent(waMessage)}`}
+            href={`https://wa.me/33667489562?text=${encodeURIComponent(waMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-1.5 rounded-xl py-3 text-white text-sm font-semibold cursor-pointer transition-opacity hover:opacity-80"

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Car, ShoppingCart, Search, ArrowRight, CheckCircle2 } from "lucide-react";
+import VtcPlatformMarks from "@/components/ui/VtcPlatformMarks";
 
 const services = [
   {
@@ -13,8 +14,8 @@ const services = [
     desc: "Assurance, entretien et assistance inclus. Démarrez ou développez votre activité VTC simplement.",
     features: ["Assurance incluse", "Entretien inclus", "1 350 km/semaine", "Dès 269 €/sem HT"],
     cta: "Voir les véhicules",
-    accent: "var(--eco-green-neon)",
-    span: "lg:col-span-2",
+    accent: "#49E58C",
+    span: "lg:col-span-1",
     image: "https://images.unsplash.com/photo-1619767886558-efdc259b4f61?w=800&q=70",
   },
   {
@@ -33,7 +34,7 @@ const services = [
     icon: Search,
     href: "/mandataire-auto",
     title: "Mandataire Auto",
-    sub: "Votre véhicule neuf au meilleur prix",
+    sub: "Votre véhicule d'occasion au meilleur prix",
     desc: "Commandez un véhicule récent au meilleur tarif. Nous négocions pour vous auprès des réseaux.",
     features: ["Toutes marques", "Meilleur prix", "Transparence totale", "Accompagnement"],
     cta: "Faire une demande",
@@ -77,13 +78,6 @@ export default function BentoServices() {
           </div>
 
           <div className="relative z-10 p-6 flex flex-col h-full min-h-[280px]">
-            {badge && (
-              <span className="self-start px-2.5 py-1 rounded-full text-xs font-bold mb-4"
-                style={{ background: "rgba(57,189,235,0.15)", color: "var(--eco-green-neon)", border: "1px solid rgba(57,189,235,0.3)" }}>
-                {badge}
-              </span>
-            )}
-
             <div className="w-11 h-11 rounded-2xl flex items-center justify-center mb-4"
               style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>
               <Icon className="w-5 h-5 text-white" />
@@ -91,7 +85,17 @@ export default function BentoServices() {
 
             <h3 className="font-extrabold text-xl text-white mb-1">{title}</h3>
             <p className="text-sm font-medium mb-2" style={{ color: accent }}>{sub}</p>
-            <p className="text-gray-400 text-sm mb-5 leading-relaxed flex-1">{desc}</p>
+            {badge && (
+              <span className="self-start px-2.5 py-1 rounded-full text-xs font-bold mb-3"
+                style={{ background: "rgba(73,229,140,0.15)", color: "var(--eco-green-neon)", border: "1px solid rgba(73,229,140,0.3)" }}>
+                {badge}
+              </span>
+            )}
+            <p className="text-gray-400 text-sm mb-4 leading-relaxed flex-1">{desc}</p>
+
+            {href === "/location-vtc" && (
+              <VtcPlatformMarks compact className="mb-5" />
+            )}
 
             <ul className="flex flex-col gap-1.5 mb-6">
               {features.map(f => (

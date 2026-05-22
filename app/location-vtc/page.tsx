@@ -19,6 +19,7 @@ import { getVtcVehicles } from "@/data/vehicles";
 import { faqs } from "@/data/faqs";
 import VehicleCard from "@/components/vehicles/VehicleCard";
 import FAQAccordion from "@/components/ui/FAQAccordion";
+import VtcPlatformMarks from "@/components/ui/VtcPlatformMarks";
 import StickyMobileCTA from "@/components/mobile/StickyMobileCTA";
 
 export const metadata: Metadata = {
@@ -179,22 +180,7 @@ export default function LocationVtcPage() {
             assistance inclus. Compatible avec toutes les plateformes.
           </p>
 
-          {/* Platform chips */}
-          <div className="flex items-center justify-center gap-2 flex-wrap mb-8">
-            {["Uber", "Bolt", "Heetch"].map((p) => (
-              <span
-                key={p}
-                className="px-3 py-1.5 rounded-full text-xs font-semibold"
-                style={{
-                  background: "rgba(255,255,255,0.07)",
-                  color: "rgba(255,255,255,0.6)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                }}
-              >
-                {p}
-              </span>
-            ))}
-          </div>
+          <VtcPlatformMarks className="justify-center mb-8" />
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -719,7 +705,7 @@ export default function LocationVtcPage() {
               Faire une demande <ArrowRight className="w-4 h-4" />
             </Link>
             <a
-              href="tel:+33100000000"
+              href="tel:+33667489562"
               className="flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-bold text-sm transition-opacity hover:opacity-80 cursor-pointer"
               style={{
                 border: "1px solid rgba(255,255,255,0.18)",

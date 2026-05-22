@@ -22,7 +22,7 @@ export default function MentionsLegalesPage() {
           <p><strong>RCS :</strong> Nanterre [à confirmer]</p>
           <p><strong>TVA intracommunautaire :</strong> [À compléter]</p>
           <p><strong>Siège social :</strong> 20 bis Rue Louis Philippe, 92200 Neuilly-sur-Seine</p>
-          <p><strong>Téléphone :</strong> 01 00 00 00 00</p>
+          <p><strong>Téléphone :</strong> 06 67 48 95 62</p>
           <p><strong>Email :</strong> contact@ecoride.pro</p>
           <p><strong>Directeur de publication :</strong> [Nom du dirigeant]</p>
 

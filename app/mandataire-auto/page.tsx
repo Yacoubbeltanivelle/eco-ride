@@ -20,7 +20,7 @@ import FAQAccordion from "@/components/ui/FAQAccordion";
 import StickyMobileCTA from "@/components/mobile/StickyMobileCTA";
 
 export const metadata: Metadata = {
-  title: "Mandataire Automobile — Votre Véhicule Neuf au Meilleur Prix | ECO RIDE",
+  title: "Mandataire Automobile — Votre Véhicule d'Occasion au Meilleur Prix | ECO RIDE",
   description:
     "ECO RIDE, mandataire automobile : commandez votre véhicule récent au meilleur prix. Toutes marques, transparence totale, accompagnement personnalisé.",
 };
@@ -57,7 +57,7 @@ const advantages = [
   { icon: Handshake, label: "Toutes marques", desc: "Citroën, Peugeot, Renault, Toyota, Tesla, Volkswagen et bien d'autres." },
   { icon: Shield, label: "Transparence totale", desc: "Notre commission est annoncée dès le départ. Aucun frais surprise." },
   { icon: Users, label: "Accompagnement A à Z", desc: "Un interlocuteur dédié du premier échange jusqu'à la remise des clés." },
-  { icon: FileText, label: "Démarches gérées", desc: "Immatriculation, garanties, financement : on s'occupe de tout." },
+  { icon: FileText, label: "Démarches gérées", desc: "Immatriculation, garanties, suivi du dossier : on s'occupe de tout." },
   { icon: Clock, label: "Délais optimisés", desc: "Notre réseau actif nous permet de raccourcir les délais de commande." },
 ];
 
@@ -71,7 +71,7 @@ const mandataireTestimonial = {
   nom: "Marc D.",
   role: "Client mandataire",
   vehicleUsed: "Toyota Corolla Hybride",
-  text: "ECO RIDE m'a trouvé une Toyota Corolla Hybride neuve à un prix inférieur à ce que j'avais trouvé en concession. Transparence totale sur les frais.",
+  text: "ECO RIDE m'a trouvé une Toyota Corolla Hybride d'occasion à un prix inférieur à ce que j'avais trouvé en concession. Transparence totale sur les frais.",
   rating: 5,
 };
 
@@ -112,7 +112,7 @@ export default function MandataireAutoPage() {
             className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-[1.1]"
             style={{ color: "var(--eco-white)" }}
           >
-            Votre véhicule neuf,{" "}
+            Votre véhicule d'occasion,{" "}
             <span style={{ color: "var(--eco-green-neon)" }}>au meilleur prix</span>
           </h1>
 
@@ -135,7 +135,7 @@ export default function MandataireAutoPage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
-              href="tel:+33100000000"
+              href="tel:+33667489562"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-sm transition-opacity hover:opacity-80 cursor-pointer"
               style={{
                 background: "rgba(255,255,255,0.08)",
@@ -403,7 +403,7 @@ export default function MandataireAutoPage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
-              href="tel:+33100000000"
+              href="tel:+33667489562"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-sm transition-opacity hover:opacity-80 cursor-pointer"
               style={{
                 background: "rgba(255,255,255,0.15)",

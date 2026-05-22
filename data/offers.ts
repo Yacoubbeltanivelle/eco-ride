@@ -31,7 +31,7 @@ export const mainOffers: Offer[] = [
       "Contrôle technique OK",
       "Carnet de suivi",
       "Accompagnement personnalisé",
-      "Financement possible",
+      "Conseil sur votre budget",
       "Reprise étudiée",
     ],
     cta: "Voir les véhicules",
@@ -39,7 +39,7 @@ export const mainOffers: Offer[] = [
   {
     id: "mandataire-auto",
     title: "Mandataire Auto",
-    subtitle: "Votre véhicule neuf au meilleur prix",
+    subtitle: "Votre véhicule d'occasion au meilleur prix",
     description: "Commandez le véhicule de vos rêves au meilleur tarif. Nous négocions pour vous auprès des réseaux et importateurs.",
     icon: "Search",
     href: "/mandataire-auto",

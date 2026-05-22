@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <Header />
-        <main className="min-h-screen pt-16 pb-20 md:pb-0">{children}</main>
+        <main className="min-h-screen pt-20 pb-20 md:pb-0">{children}</main>
         <Footer />
         <MobileBottomNav />
       </body>

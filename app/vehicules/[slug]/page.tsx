@@ -118,14 +118,14 @@ function DesktopCTASidebar({
           Demander ce véhicule <ArrowRight className="w-4 h-4" />
         </Link>
         <a
-          href="tel:+33100000000"
+          href="tel:+33667489562"
           className="flex items-center justify-center gap-2 py-3 rounded-2xl text-sm font-semibold cursor-pointer transition-colors hover:bg-gray-100"
           style={{ border: "1.5px solid var(--eco-black)", color: "var(--eco-black)", background: "white" }}
         >
           <Phone className="w-4 h-4" /> Appeler
         </a>
         <a
-          href={`https://wa.me/33100000000?text=${encodeURIComponent(waMessage)}`}
+          href={`https://wa.me/33667489562?text=${encodeURIComponent(waMessage)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 py-3 rounded-2xl text-sm font-semibold text-white cursor-pointer transition-opacity hover:opacity-90"
