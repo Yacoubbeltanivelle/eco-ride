@@ -34,7 +34,7 @@ const stats = [
   { value: "500+", label: "chauffeurs accompagnés" },
   { value: "4.9 / 5", label: "satisfaction moyenne" },
   { value: "dès 269 €", label: "HT / semaine" },
-  { value: "48 h", label: "mise à disposition" },
+  { value: "24 h", label: "mise à disposition" },
 ];
 
 const formules = [
@@ -81,7 +81,7 @@ const steps = [
     n: "03",
     Icon: Car,
     title: "Prise en charge",
-    desc: "Véhicule prêt et contrôlé sous 48 h. Activez vos courses immédiatement.",
+    desc: "Véhicule prêt et contrôlé sous 24 h. Activez vos courses immédiatement.",
   },
 ];
 
@@ -90,7 +90,7 @@ const avantages = [
   { Icon: Wrench, title: "Entretien compris", desc: "Révisions et CT pris en charge selon formule" },
   { Icon: Headphones, title: "Assistance 24 / 7", desc: "En cas de panne, un relais est prévu" },
   { Icon: BadgeCheck, title: "Compatibilité plateformes", desc: "Véhicules homologués Uber, Bolt, Heetch" },
-  { Icon: Zap, title: "Disponibilité rapide", desc: "Mise à disposition sous 48 h selon stock" },
+  { Icon: Zap, title: "Disponibilité rapide", desc: "Mise à disposition sous 24 h selon stock" },
   { Icon: TrendingUp, title: "Sans engagement long", desc: "Flexibilité hebdomadaire ou mensuelle" },
 ];
 
@@ -128,7 +128,7 @@ const infos: { label: string; value: string }[] = [
   { label: "Caution", value: "1 200 € – 2 500 €" },
   { label: "Durée minimum", value: "1 semaine" },
   { label: "Km inclus / sem.", value: "1 350 km" },
-  { label: "Mise à disposition", value: "Sous 48 h" },
+  { label: "Mise à disposition", value: "Sous 24 h" },
   { label: "Plateformes", value: "Uber, Bolt, Heetch…" },
 ];
 
