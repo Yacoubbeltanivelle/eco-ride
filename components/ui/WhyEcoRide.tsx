@@ -58,7 +58,7 @@ export default function WhyEcoRide() {
         <ScrollReveal>
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-              Pourquoi choisir ECO RIDE ?
+              Pourquoi choisir ECO&nbsp;RIDE&nbsp;?
             </h2>
             <p className="mt-2 font-semibold" style={{ color: "var(--eco-blue)" }}>
               Les avantages de la location en toute sérénité
