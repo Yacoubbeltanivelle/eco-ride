@@ -67,7 +67,7 @@ export default function WhyEcoRide() {
         </ScrollReveal>
 
         {/* Grille 2 colonnes max + banner pleine largeur */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           {advantages.map(({ icon: Icon, title, desc }, i) => (
             <ScrollReveal key={title} delay={i * 0.05}>
               <div className="bg-white rounded-2xl p-5 flex flex-col items-center text-center gap-3 border border-blue-100 hover:shadow-md transition-shadow h-full">
