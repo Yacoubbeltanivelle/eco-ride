@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Phone, MessageCircle, ChevronRight, ShieldCheck, Wrench, Clock, Star, MapPin } from "lucide-react";
+import { ArrowRight, Phone, MessageCircle, ChevronRight, MapPin } from "lucide-react";
 import { getFeaturedVehicles } from "@/data/vehicles";
 import { testimonials } from "@/data/testimonials";
 import { faqs } from "@/data/faqs";
@@ -11,18 +11,13 @@ import BentoServices from "@/components/ui/BentoServices";
 import TestimonialSlider from "@/components/ui/TestimonialSlider";
 import AnimatedSearchBar from "@/components/ui/AnimatedSearchBar";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import WhyEcoRide from "@/components/ui/WhyEcoRide";
 
 export const metadata: Metadata = {
   title: "ECO RIDE — Location VTC, Vente Occasion & Mandataire | Neuilly-sur-Seine",
   description: "ECO RIDE : louez un véhicule professionnel, achetez occasion ou commandez en mandataire. Véhicules contrôlés, prix clairs, accompagnement personnalisé.",
 };
 
-const trustItems = [
-  { icon: ShieldCheck, label: "Véhicules contrôlés", desc: "Révision et CT à jour" },
-  { icon: Wrench,      label: "Entretien inclus",    desc: "Selon formule location" },
-  { icon: Clock,       label: "Assistance 24/7",     desc: "Selon formule location" },
-  { icon: Star,        label: "Avis clients",         desc: "5/5 sur nos prestations" },
-];
 
 export default function HomePage() {
   const featured = getFeaturedVehicles();
@@ -177,25 +172,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── TRUST BADGES ──────────────────────────────────────── */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
-        <ScrollReveal>
-          <h2 className="text-2xl font-extrabold text-gray-900 mb-8 text-center">Pourquoi choisir ECO RIDE ?</h2>
-        </ScrollReveal>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {trustItems.map(({ icon: Icon, label, desc }, i) => (
-            <ScrollReveal key={label} delay={i * 0.08}>
-              <div className="bg-white rounded-2xl p-5 flex flex-col items-center text-center gap-2 border border-gray-100 hover:shadow-md transition-shadow h-full">
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: "var(--eco-mint-soft)" }}>
-                  <Icon className="w-5 h-5" style={{ color: "var(--eco-green)" }} />
-                </div>
-                <p className="font-semibold text-sm text-gray-900">{label}</p>
-                <p className="text-xs text-gray-500">{desc}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
+      {/* ─── POURQUOI ECO RIDE ─────────────────────────────────── */}
+      <WhyEcoRide />
 
       {/* ─── TÉMOIGNAGES ───────────────────────────────────────── */}
       <section className="py-16 px-4" style={{ background: "var(--eco-mint-soft)" }}>

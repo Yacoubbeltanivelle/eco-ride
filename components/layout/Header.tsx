@@ -22,12 +22,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 h-14 sm:h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center" aria-label="ECO RIDE - Accueil">
           <Image
-            src={asset("/brand/ecoride-icon-blue.svg")}
-            alt="ECO RIDE - Solution de Location"
-            width={96}
-            height={96}
+            src={asset("/brand/ecoride-wordmark-blue.svg")}
+            alt="ECO RIDE"
+            width={180}
+            height={50}
             priority
-            className="h-20 w-20 object-contain sm:h-28 sm:w-28"
+            className="h-10 w-auto object-contain sm:h-12"
           />
         </Link>
 
