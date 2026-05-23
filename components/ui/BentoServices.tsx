@@ -8,7 +8,6 @@ const services = [
   {
     icon: Car,
     href: "/location-vtc",
-    badge: "Le plus demandé",
     title: "Location VTC",
     sub: "Pour chauffeurs et professionnels",
     desc: "Assurance, entretien et assistance inclus. Démarrez ou développez votre activité VTC simplement.",
@@ -21,10 +20,11 @@ const services = [
   {
     icon: ShoppingCart,
     href: "/achat-occasion",
-    title: "Achat Occasion",
-    sub: "Véhicules contrôlés et sélectionnés",
-    desc: "Achetez en toute confiance un véhicule révisé, avec carnet de suivi et contrôle technique.",
-    features: ["Révision à jour", "CT validé", "2 clés", "Accompagnement"],
+    badge: "Le plus demandé",
+    title: "Acheter un véhicule",
+    sub: "Occasions contrôlées et sélectionnées",
+    desc: "Achetez en toute confiance un véhicule révisé, avec suivi et contrôle technique.",
+    features: ["Révision à jour", "Contrôle technique validé", "2 clés", "Accompagnement"],
     cta: "Voir les véhicules",
     accent: "var(--eco-blue)",
     span: "lg:col-span-1",

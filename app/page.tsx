@@ -58,8 +58,8 @@ export default function HomePage() {
 
             <ScrollReveal delay={0.05}>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-5">
-                Location, vente<br />et mandataire<br />
-                <span style={{ color: "var(--eco-green-neon)" }}>automobile.</span>
+                Achetez, louez<br />et importez<br />
+                <span style={{ color: "var(--eco-green-neon)" }}>votre véhicule.</span>
               </h1>
             </ScrollReveal>
 
