@@ -158,8 +158,8 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { n: "01", title: "Choisissez", desc: "Parcourez notre catalogue et sélectionnez le véhicule adapté à votre besoin." },
-              { n: "02", title: "Envoyez votre dossier", desc: "Transmettez vos documents. On valide rapidement et on vous recontacte sous 24h." },
-              { n: "03", title: "Prenez le volant", desc: "RDV fixé, contrat signé, vous roulez. On reste disponibles tout au long de votre contrat." },
+              { n: "02", title: "Envoyez votre dossier", desc: "Transmettez vos documents. Après validation, vous recevez votre contrat sous 24h." },
+              { n: "03", title: "Prenez le volant", desc: "Choisissez votre date de départ, et commencez à payer uniquement le jour du départ. Nous restons disponibles tout au long de votre contrat." },
             ].map(({ n, title, desc }, i) => (
               <ScrollReveal key={n} delay={i * 0.1}>
                 <div className="flex flex-col items-center text-center p-6 rounded-3xl h-full"

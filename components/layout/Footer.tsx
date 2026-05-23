@@ -24,16 +24,16 @@ export default function Footer() {
             <div className="mt-4 flex flex-col gap-2 text-sm">
               <a href="tel:+33667489562" className="flex items-center gap-2 hover:text-white"><Phone className="w-4 h-4" /> 06 67 48 95 62</a>
               <a href="mailto:contact@ecoride.pro" className="flex items-center gap-2 hover:text-white"><Mail className="w-4 h-4" /> contact@ecoride.pro</a>
-              <span className="flex items-center gap-2"><MapPin className="w-4 h-4" /> 20 bis Rue Louis Philippe, 92200 Neuilly-sur-Seine</span>
+              <span className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /><span>20 bis Rue Louis Philippe,<br />92200 Neuilly-sur-Seine</span></span>
             </div>
           </div>
 
           <div>
             <h4 className="text-white font-semibold mb-4">Services</h4>
             <ul className="flex flex-col gap-2 text-sm">
-              <li><Link href="/location-vtc" className="hover:text-white">Location VTC</Link></li>
-              <li><Link href="/achat-occasion" className="hover:text-white">Achat Occasion</Link></li>
-              <li><Link href="/mandataire-auto" className="hover:text-white">Mandataire Auto</Link></li>
+              <li><Link href="/location-vtc" className="hover:text-white">Louer</Link></li>
+              <li><Link href="/achat-occasion" className="hover:text-white">Acheter</Link></li>
+              <li><Link href="/mandataire-auto" className="hover:text-white">Commander</Link></li>
               <li><Link href="/simulateur" className="hover:text-white">Simulateur</Link></li>
               <li><Link href="/comparer" className="hover:text-white">Comparateur</Link></li>
             </ul>

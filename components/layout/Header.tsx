@@ -8,9 +8,9 @@ import { asset } from "@/lib/utils";
 
 const navLinks = [
   { href: "/catalogue", label: "Catalogue" },
-  { href: "/location-vtc", label: "Location VTC" },
-  { href: "/achat-occasion", label: "Achat Occasion" },
-  { href: "/mandataire-auto", label: "Mandataire" },
+  { href: "/location-vtc", label: "Louer" },
+  { href: "/achat-occasion", label: "Acheter" },
+  { href: "/mandataire-auto", label: "Commander" },
   { href: "/simulateur", label: "Simulateur" },
 ];
 
@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 h-20 sm:h-24 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 h-14 sm:h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center" aria-label="ECO RIDE - Accueil">
           <Image
             src={asset("/brand/ecoride-icon-blue.svg")}
