@@ -26,7 +26,7 @@ const advantages = [
   {
     icon: Calendar,
     title: "Choisissez la durée",
-    desc: "De 1 mois à plusieurs mois",
+    desc: "De 1 à 36 mois",
   },
   {
     icon: Gauge,
@@ -46,7 +46,7 @@ const advantages = [
   {
     icon: Euro,
     title: "Sans apport",
-    desc: "Aucun paiement à l'avance",
+    desc: "Seule une caution remboursable est demandée",
   },
 ];
 
