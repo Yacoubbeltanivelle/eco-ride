@@ -84,14 +84,14 @@ export default function BentoServices() {
             </div>
 
             <h3 className="font-extrabold text-xl text-white mb-1">{title}</h3>
-            <p className="text-sm font-medium mb-2" style={{ color: accent }}>{sub}</p>
+            <p className="text-sm font-medium mb-2 text-pretty" style={{ color: accent }}>{sub}</p>
             {badge && (
               <span className="self-start px-2.5 py-1 rounded-full text-xs font-bold mb-3"
                 style={{ background: "rgba(73,229,140,0.15)", color: "var(--eco-green-neon)", border: "1px solid rgba(73,229,140,0.3)" }}>
                 {badge}
               </span>
             )}
-            <p className="text-gray-400 text-sm mb-4 leading-relaxed flex-1">{desc}</p>
+            <p className="text-gray-400 text-sm mb-4 leading-relaxed flex-1 text-pretty">{desc}</p>
 
             {href === "/location-vtc" && (
               <VtcPlatformMarks compact className="mb-5" />
@@ -99,8 +99,9 @@ export default function BentoServices() {
 
             <ul className="flex flex-col gap-1.5 mb-6">
               {features.map(f => (
-                <li key={f} className="flex items-center gap-2 text-sm text-gray-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" style={{ color: accent }} />{f}
+                <li key={f} className="flex items-start gap-2 text-sm text-gray-300 leading-snug">
+                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: accent }} />
+                  <span className="text-pretty">{f}</span>
                 </li>
               ))}
             </ul>

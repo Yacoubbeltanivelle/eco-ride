@@ -38,7 +38,7 @@ export default function HomePage() {
             priority
             className="object-cover"
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,7,6,0.85) 0%, rgba(5,7,6,0.55) 50%, rgba(5,7,6,0.6) 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,7,6,0.92) 0%, rgba(5,7,6,0.50) 45%, rgba(5,7,6,0.35) 100%)" }} />
         </div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pb-16 pt-28">
@@ -52,16 +52,18 @@ export default function HomePage() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.05}>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-5">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-5 text-balance">
                 Achetez, louez<br />et importez<br />
                 <span style={{ color: "var(--eco-green-neon)" }}>votre véhicule.</span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal delay={0.1}>
-              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                Une mobilité plus simple, plus fiable, plus responsable.<br />
-                Véhicules contrôlés · Prix transparents · Accompagnement personnalisé
+              <p className="max-w-xl text-base sm:text-lg text-gray-300 mb-8 leading-relaxed">
+                <span className="block text-pretty">Une mobilité plus simple, plus fiable, plus responsable.</span>
+                <span className="block mt-1 text-sm sm:text-base">
+                  <span className="whitespace-nowrap">Véhicules contrôlés&nbsp;· Prix transparents</span>&nbsp;· Accompagnement personnalisé
+                </span>
               </p>
             </ScrollReveal>
 
@@ -97,14 +99,14 @@ export default function HomePage() {
       <section className="py-16 px-4" style={{ background: "var(--eco-black)" }}>
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-10">
+            <div className="max-w-2xl mx-auto text-center mb-10">
               <span className="text-xs font-semibold tracking-[0.3em] uppercase" style={{ color: "var(--eco-green-neon)" }}>
                 Nos services
               </span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-2">
                 Choisissez votre formule
               </h2>
-              <p className="text-gray-400 mt-2">Location · Vente · Mandataire<br className="sm:hidden" /> — tout ce dont vous avez besoin</p>
+              <p className="max-w-sm mx-auto text-gray-400 mt-2 text-balance sm:max-w-none">Achat&nbsp;· Location&nbsp;· Mandat&nbsp;· Tout ce dont vous avez besoin</p>
             </div>
           </ScrollReveal>
           <BentoServices />
@@ -120,7 +122,7 @@ export default function HomePage() {
                 Catalogue
               </span>
               <h2 className="text-3xl font-extrabold text-gray-900 mt-1">Véhicules disponibles</h2>
-              <p className="text-gray-500 mt-1">Sélectionnés et contrôlés par notre équipe</p>
+              <p className="max-w-sm text-gray-500 mt-1 text-pretty">Sélectionnés et contrôlés par notre équipe</p>
             </div>
             <Link href="/catalogue" className="hidden md:flex items-center gap-1 font-semibold text-sm hover:underline"
               style={{ color: "var(--eco-green)" }}>
@@ -147,14 +149,14 @@ export default function HomePage() {
             <span className="text-xs font-semibold tracking-[0.3em] uppercase" style={{ color: "var(--eco-green-neon)" }}>
               Comment ça marche
             </span>
-            <h2 className="text-3xl font-extrabold text-white mt-2 mb-2">Simple en 3 étapes</h2>
-            <p className="text-gray-400 mb-10">De la demande à la mise à disposition</p>
+            <h2 className="text-3xl font-extrabold text-white mt-2 mb-2 text-balance">Simple en 3 étapes</h2>
+            <p className="text-gray-400 mb-10 text-balance">De la demande à la mise à disposition</p>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { n: "01", title: "Choisissez", desc: "Parcourez notre catalogue et sélectionnez le véhicule adapté à votre besoin." },
               { n: "02", title: "Envoyez votre dossier", desc: "Transmettez vos documents. Après validation, vous recevez votre contrat sous 24h." },
-              { n: "03", title: "Prenez le volant", desc: "Choisissez votre date de départ, et commencez à payer uniquement le jour du départ. Nous restons disponibles tout au long de votre contrat." },
+              { n: "03", title: "Prenez le volant", desc: "Choisissez votre date de départ, et commencez à payer uniquement le jour du départ." },
             ].map(({ n, title, desc }, i) => (
               <ScrollReveal key={n} delay={i * 0.1}>
                 <div className="flex flex-col items-center text-center p-6 rounded-3xl h-full"
@@ -164,7 +166,7 @@ export default function HomePage() {
                     {n}
                   </div>
                   <h3 className="font-bold text-white text-lg mb-2">{title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
+                  <p className="max-w-[18rem] mx-auto text-gray-400 text-sm leading-relaxed text-pretty">{desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -184,7 +186,7 @@ export default function HomePage() {
                 Témoignages
               </span>
               <h2 className="text-3xl font-extrabold text-gray-900 mt-2">Ils nous font confiance</h2>
-              <p className="text-gray-500 mt-2">Ce que disent nos clients</p>
+              <p className="text-gray-500 mt-2 text-balance">Ce que disent nos clients</p>
             </div>
           </ScrollReveal>
           <TestimonialSlider items={testimonials} />
@@ -199,7 +201,7 @@ export default function HomePage() {
               FAQ
             </span>
             <h2 className="text-2xl font-extrabold text-gray-900 mt-2">Questions fréquentes</h2>
-            <p className="text-gray-500 mt-2">Tout ce que vous devez savoir</p>
+            <p className="text-gray-500 mt-2 text-balance">Tout ce que vous devez savoir</p>
           </div>
         </ScrollReveal>
         <FAQAccordion items={faqs} />
@@ -217,7 +219,7 @@ export default function HomePage() {
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <ScrollReveal>
             <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3">Prêt à démarrer ?</h2>
-            <p className="text-white/80 mb-8 text-lg">Contactez-nous dès maintenant. Réponse sous 24h.</p>
+            <p className="max-w-md mx-auto text-white/80 mb-8 text-lg text-balance">Contactez-nous dès maintenant. Réponse sous 24h.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:+33667489562"
                 className="flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold transition-transform active:scale-95"

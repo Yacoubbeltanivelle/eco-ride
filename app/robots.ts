@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin-demo", "/espace-client", "/api/"],
+        disallow: ["/admin-demo", "/api/"],
       },
     ],
     sitemap: "https://ecoride.pro/sitemap.xml",

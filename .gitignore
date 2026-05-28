@@ -22,3 +22,7 @@ Thumbs.db
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Playwright screenshots
+*.png
+.playwright-mcp/

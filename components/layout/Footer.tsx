@@ -5,7 +5,7 @@ import { asset } from "@/lib/utils";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-12 pb-6">
+    <footer className="bg-gray-900 text-gray-300 pt-12 pb-24 md:pb-6">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           <div>
@@ -18,8 +18,8 @@ export default function Footer() {
                 className="h-20 w-auto object-contain"
               />
             </div>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Vente, location et mandataire automobile. Une mobilité plus simple, plus fiable, plus responsable.
+            <p className="text-sm text-gray-400 leading-relaxed text-pretty">
+              Vente, location et mandat automobile.<br />Une mobilité plus simple, plus fiable, plus responsable.
             </p>
             <div className="mt-4 flex flex-col gap-2 text-sm">
               <a href="tel:+33667489562" className="flex items-center gap-2 hover:text-white"><Phone className="w-4 h-4" /> 06 67 48 95 62</a>
@@ -57,14 +57,13 @@ export default function Footer() {
               <li><Link href="/cgv" className="hover:text-white">CGV</Link></li>
               <li><Link href="/confidentialite" className="hover:text-white">Politique de confidentialité</Link></li>
               <li><Link href="/cookies" className="hover:text-white">Cookies</Link></li>
-              <li><Link href="/espace-client" className="hover:text-white">Espace client</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} ECO RIDE — SIREN 838 273 910 — RCS Nanterre</p>
-          <p>Hébergement : OVH SAS, 2 rue Kellermann, 59100 Roubaix</p>
+          <p className="text-center text-balance md:text-left">© {new Date().getFullYear()} ECO RIDE — SIREN 838 273 910 — RCS Nanterre</p>
+          <p className="text-center text-balance md:text-right">Hébergement : OVH SAS, 2 rue Kellermann, 59100 Roubaix</p>
         </div>
       </div>
     </footer>

@@ -26,7 +26,7 @@ const advantages = [
   {
     icon: Calendar,
     title: "Choisissez la durée",
-    desc: "De 1 à 36 mois",
+    desc: "De 1 à 36 mois renouvelable",
   },
   {
     icon: Gauge,
@@ -40,7 +40,7 @@ const advantages = [
   },
   {
     icon: Shield,
-    title: "Assurances incluse",
+    title: "Assurance incluse",
     desc: "Roulez l'esprit tranquille",
   },
   {
@@ -57,17 +57,17 @@ export default function WhyEcoRide() {
         {/* Header */}
         <ScrollReveal>
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 text-balance">
               Pourquoi choisir ECO&nbsp;RIDE&nbsp;?
             </h2>
-            <p className="mt-2 font-semibold" style={{ color: "var(--eco-blue)" }}>
+            <p className="mx-auto mt-2 max-w-sm font-semibold text-balance sm:max-w-none" style={{ color: "var(--eco-blue)" }}>
               Les avantages de la location en toute sérénité
             </p>
           </div>
         </ScrollReveal>
 
         {/* Grille 2 colonnes max + banner pleine largeur */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 min-[460px]:grid-cols-2">
           {advantages.map(({ icon: Icon, title, desc }, i) => (
             <ScrollReveal key={title} delay={i * 0.05}>
               <div className="bg-white rounded-2xl p-5 flex flex-col items-center text-center gap-3 border border-blue-100 hover:shadow-md transition-shadow h-full">
@@ -77,8 +77,8 @@ export default function WhyEcoRide() {
                 >
                   <Icon className="w-6 h-6" style={{ color: "#39BDEB" }} />
                 </div>
-                <p className="font-bold text-sm text-gray-900 leading-snug">{title}</p>
-                <p className="text-xs text-gray-500 leading-relaxed">{desc}</p>
+                <p className="max-w-[15rem] font-bold text-sm text-gray-900 leading-snug text-balance">{title}</p>
+                <p className="max-w-[15rem] text-xs text-gray-500 leading-relaxed text-pretty">{desc}</p>
               </div>
             </ScrollReveal>
           ))}
@@ -89,8 +89,8 @@ export default function WhyEcoRide() {
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-blue-100">
                 <Car className="w-6 h-6" style={{ color: "#39BDEB" }} />
               </div>
-              <p className="font-bold text-sm text-gray-900 leading-snug">Entretien, taxes et assistance</p>
-              <p className="text-xs text-gray-500 leading-relaxed">Tout est inclus, pas de frais cachés</p>
+              <p className="max-w-[15rem] font-bold text-sm text-gray-900 leading-snug text-balance">Entretien, taxes et assistance</p>
+              <p className="max-w-[15rem] text-xs text-gray-500 leading-relaxed text-pretty">Tout est inclus, pas de frais cachés</p>
             </div>
           </ScrollReveal>
         </div>

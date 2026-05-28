@@ -54,7 +54,7 @@ export default function TestimonialSlider({ items, autoPlay = true, interval = 5
               ))}
             </div>
           </div>
-          <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic text-pretty">
             &ldquo;{item.text}&rdquo;
           </p>
           <div className="flex items-center gap-3">
