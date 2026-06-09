@@ -23,25 +23,33 @@ export const fuelLabels: Record<string, string> = {
   essence: "Essence",
   diesel: "Diesel",
   hybride: "Hybride",
+  hybride_rechargeable: "Hybride rechargeable",
   electrique: "Électrique",
+  gpl: "GPL",
 };
 
 export const fuelColors: Record<string, string> = {
   essence: "bg-orange-100 text-orange-700",
   diesel: "bg-slate-100 text-slate-700",
   hybride: "bg-sky-100 text-sky-700",
+  hybride_rechargeable: "bg-cyan-100 text-cyan-700",
   electrique: "bg-blue-100 text-blue-700",
+  gpl: "bg-emerald-100 text-emerald-700",
 };
 
 export const statusLabels: Record<string, string> = {
   available: "Disponible",
   reserved: "Réservé",
+  rented: "Loué",
+  sold: "Vendu",
   coming_soon: "Bientôt dispo",
 };
 
 export const statusColors: Record<string, string> = {
   available: "bg-green-100 text-green-700",
   reserved: "bg-red-100 text-red-700",
+  rented: "bg-blue-100 text-blue-700",
+  sold: "bg-gray-100 text-gray-700",
   coming_soon: "bg-amber-100 text-amber-700",
 };
 

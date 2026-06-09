@@ -1,14 +1,18 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
+import { CheckCircle2, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { Suspense } from "react";
+import { submitLead } from "@/lib/api/leads";
 
 const steps = ["Votre besoin", "Véhicule", "Dates", "Profil", "Récapitulatif", "Confirmation"];
 
 function DemandeForm() {
   const params = useSearchParams();
   const [step, setStep] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [leadId, setLeadId] = useState<string | null>(null);
   const [data, setData] = useState({
     intent: params.get("intent") || "",
     type: params.get("type") || "",
@@ -16,8 +20,8 @@ function DemandeForm() {
     budget: "",
     duree: "",
     dateDebut: "",
-    marque: "",
-    modele: "",
+    marque: params.get("marque") || "",
+    modele: params.get("modele") || "",
     nom: "",
     prenom: "",
     telephone: "",
@@ -27,8 +31,98 @@ function DemandeForm() {
   });
 
   const update = (k: string, v: string | boolean) => setData(d => ({ ...d, [k]: v }));
-  const next = () => setStep(s => Math.min(s + 1, steps.length - 1));
   const prev = () => setStep(s => Math.max(s - 1, 0));
+
+  const phoneRegex = /^\+?[0-9 .\-]{8,20}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const canProceed = (): boolean => {
+    switch (step) {
+      case 0:
+        return !!data.intent && !!data.type;
+      case 1:
+        return data.marque.trim().length >= 2;
+      case 2:
+        return data.intent === "location"
+          ? !!data.duree
+          : true;
+      case 3:
+        return (
+          data.prenom.trim().length >= 2 &&
+          data.nom.trim().length >= 2 &&
+          phoneRegex.test(data.telephone.trim()) &&
+          emailRegex.test(data.email.trim()) &&
+          data.rgpd
+        );
+      default:
+        return true;
+    }
+  };
+
+  const stepHint = (): string | null => {
+    if (step === 0) {
+      const missing: string[] = [];
+      if (!data.intent) missing.push("votre besoin (location / achat / mandataire)");
+      if (!data.type) missing.push("votre profil (VTC / particulier / pro / entreprise)");
+      return missing.length > 0 ? `Requis : ${missing.join(" · ")}` : null;
+    }
+    if (step === 1 && data.marque.trim().length < 2) {
+      return "Indiquez au moins la marque du véhicule souhaité.";
+    }
+    if (step === 2 && data.intent === "location" && !data.duree) {
+      return "Indiquez la durée souhaitée pour votre location.";
+    }
+    if (step === 3) {
+      const missing: string[] = [];
+      if (data.prenom.trim().length < 2) missing.push("prénom");
+      if (data.nom.trim().length < 2) missing.push("nom");
+      if (!phoneRegex.test(data.telephone.trim())) missing.push("téléphone valide (ex : 06 12 34 56 78)");
+      if (!emailRegex.test(data.email.trim())) missing.push("email valide");
+      if (!data.rgpd) missing.push("consentement RGPD");
+      return missing.length > 0 ? `Champs requis : ${missing.join(" · ")}` : null;
+    }
+    return null;
+  };
+
+  const handleNext = async () => {
+    if (step === steps.length - 2) {
+      await handleSubmit();
+    } else {
+      setStep(s => Math.min(s + 1, steps.length - 1));
+    }
+  };
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    setSubmitError(null);
+
+    const result = await submitLead({
+      firstName: data.prenom,
+      lastName: data.nom,
+      email: data.email,
+      phone: data.telephone,
+      intent: data.intent as "location" | "achat" | "mandataire",
+      clientType: (data.type as "vtc" | "particulier" | "pro" | "entreprise") || undefined,
+      vehicleBrand: data.marque || undefined,
+      vehicleModel: data.modele || undefined,
+      vehicleSlug: data.vehicule || undefined,
+      budget: data.budget || undefined,
+      startDate: data.dateDebut || undefined,
+      duration: data.duree || undefined,
+      message: data.message || undefined,
+      sourcePage: typeof window !== "undefined" ? window.location.href : undefined,
+      rgpdConsent: data.rgpd,
+    });
+
+    setSubmitting(false);
+
+    if (result.ok) {
+      setLeadId(result.data.id);
+      setStep(steps.length - 1);
+    } else {
+      setSubmitError(result.error.message || "Une erreur est survenue. Veuillez réessayer.");
+    }
+  };
 
   if (step === steps.length - 1) {
     return (
@@ -38,19 +132,16 @@ function DemandeForm() {
           <CheckCircle2 className="w-10 h-10" style={{ color: "var(--eco-green)" }} />
         </div>
         <h2 className="text-2xl font-extrabold text-gray-900 mb-2">Demande envoyée !</h2>
-        <p className="text-gray-500 mb-2">Votre demande a bien été reçue (simulation V0).</p>
+        <p className="text-gray-500 mb-2">Votre demande a bien été reçue.</p>
         <p className="text-gray-500 mb-8">Notre équipe vous recontacte sous 24h.</p>
         <div className="bg-gray-50 rounded-2xl p-5 max-w-sm mx-auto text-left mb-6 text-sm text-gray-700">
           <p><strong>Besoin :</strong> {data.intent || "Non précisé"}</p>
           <p><strong>Type client :</strong> {data.type || "Non précisé"}</p>
-          <p><strong>Véhicule :</strong> {data.vehicule || data.marque + " " + data.modele || "Non précisé"}</p>
+          <p><strong>Véhicule :</strong> {data.marque} {data.modele || "Non précisé"}</p>
           <p><strong>Nom :</strong> {data.prenom} {data.nom}</p>
           <p><strong>Contact :</strong> {data.telephone} — {data.email}</p>
+          {leadId && <p className="mt-3 text-xs text-gray-400">Réf : {leadId}</p>}
         </div>
-        <p className="text-xs text-gray-400 mb-6">
-          {/* TODO_PROD: Envoyer les données à l'API Laravel, créer un lead en base, envoyer un email de confirmation */}
-          <em>V0 — Simulation. Aucune donnée n'est réellement transmise.</em>
-        </p>
         <a href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-white" style={{ background: "var(--eco-green)" }}>
           Retour à l'accueil
         </a>
@@ -206,27 +297,33 @@ function DemandeForm() {
             <div className="flex justify-between border-b border-gray-50 pb-2"><dt className="text-gray-500">Téléphone</dt><dd className="font-semibold text-gray-900">{data.telephone || "—"}</dd></div>
             <div className="flex justify-between"><dt className="text-gray-500">Email</dt><dd className="font-semibold text-gray-900">{data.email || "—"}</dd></div>
           </dl>
-          {/* TODO_PROD: Connexion API Laravel pour créer le lead */}
-          <p className="text-xs text-amber-600 mt-4 p-3 bg-amber-50 rounded-xl">
-            V0 — Aucune donnée n'est envoyée. En production, cette demande sera transmise à l'API ECO RIDE.
-          </p>
+          {submitError && (
+            <p className="text-sm text-red-600 mt-4 p-3 bg-red-50 rounded-xl">{submitError}</p>
+          )}
         </div>
       )}
 
       <div className="flex gap-3 mt-8">
         {step > 0 && (
-          <button onClick={prev}
-            className="flex items-center gap-2 px-5 py-3 rounded-2xl font-semibold text-gray-700 bg-gray-100">
+          <button type="button" onClick={prev} disabled={submitting}
+            className="flex items-center gap-2 px-5 py-3 rounded-2xl font-semibold text-gray-700 bg-gray-100 disabled:opacity-50">
             <ArrowLeft className="w-4 h-4" /> Retour
           </button>
         )}
-        <button onClick={next}
-          disabled={step === 3 && !data.rgpd}
+        <button type="button" onClick={handleNext}
+          disabled={!canProceed() || submitting}
           className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-bold text-white disabled:opacity-50 disabled:cursor-not-allowed"
           style={{ background: "var(--eco-green)" }}>
-          {step === steps.length - 2 ? "Envoyer ma demande" : "Continuer"} <ArrowRight className="w-4 h-4" />
+          {submitting ? (
+            <><Loader2 className="w-4 h-4 animate-spin" /> Envoi en cours…</>
+          ) : (
+            <>{step === steps.length - 2 ? "Envoyer ma demande" : "Continuer"} <ArrowRight className="w-4 h-4" /></>
+          )}
         </button>
       </div>
+      {!submitting && stepHint() && (
+        <p className="text-xs text-amber-600 text-center mt-3">{stepHint()}</p>
+      )}
     </div>
   );
 }

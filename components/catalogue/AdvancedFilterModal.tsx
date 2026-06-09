@@ -9,10 +9,12 @@ const categoryOptions: { v: AdvancedFilters["category"]; l: string }[] = [
   { v: "", l: "Toutes" },
   { v: "berline", l: "Berline" },
   { v: "suv", l: "SUV" },
+  { v: "break", l: "Break" },
   { v: "citadine", l: "Citadine" },
-  { v: "van", l: "Van" },
+  { v: "utilitaire", l: "Utilitaire" },
   { v: "electrique", l: "Électrique" },
   { v: "hybride", l: "Hybride" },
+  { v: "premium", l: "Premium" },
 ];
 
 const transmissionOptions: { v: AdvancedFilters["transmission"]; l: string }[] = [

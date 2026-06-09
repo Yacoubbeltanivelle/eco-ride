@@ -6,7 +6,8 @@ import {
   Gauge, Calendar, Users, DoorOpen, Fuel, MapPin,
   FileText, ArrowRight, Settings2,
 } from "lucide-react";
-import { getVehicleBySlug, getSimilarVehicles, vehicles } from "@/data/vehicles";
+import { getVehicleBySlug, getSimilarVehicles, getAllVehicles } from "@/lib/api/vehicles";
+import { getSiteSettings } from "@/lib/api/settings";
 import VehicleScore from "@/components/vehicles/VehicleScore";
 import VehicleCard from "@/components/vehicles/VehicleCard";
 import VehicleGallery from "@/components/vehicles/VehicleGallery";
@@ -17,14 +18,39 @@ import { formatPrice, formatMileage, fuelLabels, statusLabels, statusColors } fr
 import { cn } from "@/lib/utils";
 
 export async function generateStaticParams() {
-  return vehicles.map(v => ({ slug: v.slug }));
+  const all = await getAllVehicles();
+  return all.map(v => ({ slug: v.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const v = getVehicleBySlug(slug);
+  const v = await getVehicleBySlug(slug);
   if (!v) return {};
-  return { title: v.seoTitle, description: v.seoDescription };
+
+  const canonicalUrl = `https://ecoride.pro/vehicules/${v.slug}`;
+  const ogImage = v.images[0] ?? "https://ecoride.pro/og-default.jpg";
+
+  return {
+    title: v.seoTitle,
+    description: v.seoDescription,
+    keywords: [
+      `${v.brand} ${v.model} ${v.year}`,
+      v.intent === "rental" ? "location VTC" : "voiture occasion",
+      "Neuilly-sur-Seine",
+      "ECO RIDE",
+      v.fuel,
+      v.category,
+    ],
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title: v.seoTitle,
+      description: v.seoDescription,
+      url: canonicalUrl,
+      type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${v.brand} ${v.model} ${v.year} — ECO RIDE` }],
+    },
+    robots: { index: v.status !== "sold", follow: true },
+  };
 }
 
 /* ── Atomic section wrapper ─────────────────────────── */
@@ -77,9 +103,9 @@ function IntentBadge({ intent }: { intent: string }) {
 
 /* ── Sidebar CTA card (desktop only) ──────────────── */
 function DesktopCTASidebar({
-  slug, brand, model, rentalPrice, rentalMonthly, salePrice,
+  slug, brand, model, intent, rentalPrice, rentalMonthly, salePrice,
 }: {
-  slug: string; brand: string; model: string;
+  slug: string; brand: string; model: string; intent: string;
   rentalPrice?: number; rentalMonthly?: number; salePrice?: number;
 }) {
   const waMessage = `Bonjour, je suis intéressé par : ${brand} ${model}. Pouvez-vous me recontacter ?`;
@@ -111,7 +137,7 @@ function DesktopCTASidebar({
       {/* CTAs */}
       <div className="flex flex-col gap-2.5">
         <Link
-          href={`/demande?vehicule=${slug}`}
+          href={`/demande?vehicule=${slug}&marque=${encodeURIComponent(brand)}&modele=${encodeURIComponent(model)}&intent=${intent === "sale" ? "achat" : "location"}`}
           className="flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-bold text-white cursor-pointer transition-opacity hover:opacity-90"
           style={{ background: "var(--eco-green)" }}
         >
@@ -146,14 +172,24 @@ function DesktopCTASidebar({
 /* ── Page ──────────────────────────────────────────── */
 export default async function VehicleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const vehicle = getVehicleBySlug(slug);
+  const vehicle = await getVehicleBySlug(slug);
   if (!vehicle) notFound();
 
-  const similar = getSimilarVehicles(vehicle);
+  const [similar, settings] = await Promise.all([getSimilarVehicles(slug), getSiteSettings()]);
   const vehicleFaqs = faqs.filter(f => f.category === "location" || f.category === "documents").slice(0, 5);
   const price = vehicle.rentalPriceWeeklyHt
     ? `${formatPrice(vehicle.rentalPriceWeeklyHt)} HT/sem`
     : vehicle.salePriceTtc ? `${formatPrice(vehicle.salePriceTtc)} TTC` : undefined;
+  const requiredDocuments = vehicle.requiredDocuments?.length
+    ? vehicle.requiredDocuments
+    : [
+        "Permis de conduire valide",
+        "Pièce d'identité",
+        "Justificatif de domicile (- 3 mois)",
+        "RIB bancaire",
+        vehicle.isVtcCompatible ? "Carte VTC ou document d'activité" : null,
+        "KBIS si société",
+      ].filter(Boolean) as string[];
 
   const specs = [
     { icon: Calendar,  val: `${vehicle.year}` },
@@ -167,9 +203,58 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
     vehicle.co2 !== undefined ? { icon: Fuel, val: vehicle.co2 === 0 ? "0 g CO₂" : `${vehicle.co2} g CO₂/km` } : null,
   ].filter(Boolean) as { icon: React.ElementType; val: string }[];
 
+  const carJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Car",
+    "name": `${vehicle.brand} ${vehicle.model}${vehicle.version ? ` ${vehicle.version}` : ""} ${vehicle.year}`,
+    "brand": { "@type": "Brand", "name": vehicle.brand },
+    "model": vehicle.model,
+    "vehicleModelDate": vehicle.year,
+    "color": vehicle.color ?? undefined,
+    "mileageFromOdometer": {
+      "@type": "QuantitativeValue",
+      "value": vehicle.mileageKm,
+      "unitCode": "KMT",
+    },
+    "fuelType": vehicle.fuel,
+    "vehicleTransmission": vehicle.transmission,
+    "driveWheelConfiguration": "FrontWheelDriveConfiguration",
+    "seatingCapacity": vehicle.seats,
+    "numberOfDoors": vehicle.doors,
+    "image": vehicle.images,
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "EUR",
+      "price": vehicle.salePriceTtc ?? vehicle.rentalPriceWeeklyHt ?? 0,
+      "availability": vehicle.status === "available"
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      "areaServed": "Neuilly-sur-Seine",
+      "seller": {
+        "@type": "AutomotiveBusiness",
+        "name": "ECO RIDE",
+        "telephone": "+33667489562",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Neuilly-sur-Seine",
+          "postalCode": "92200",
+          "addressCountry": "FR",
+        },
+      },
+    },
+  };
+
   return (
     <div style={{ background: "var(--eco-mint-bg)", minHeight: "100vh" }}>
-      <StickyMobileCTA vehicleLabel={`${vehicle.brand} ${vehicle.model}`} price={price} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(carJsonLd).replace(/<\/script>/gi, "<\\/script>") }}
+      />
+      <StickyMobileCTA
+        vehicleLabel={`${vehicle.brand} ${vehicle.model}`}
+        price={price}
+        demandeHref={`/demande?vehicule=${vehicle.slug}&marque=${encodeURIComponent(vehicle.brand)}&modele=${encodeURIComponent(vehicle.model)}&intent=${vehicle.intent === "sale" ? "achat" : "location"}`}
+      />
 
       <div className="max-w-7xl mx-auto px-4 pt-6 pb-32 md:pb-16">
 
@@ -257,6 +342,16 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
               </div>
             </Section>
 
+            {/* Description */}
+            {vehicle.description && (
+              <Section>
+                <SectionTitle>Description</SectionTitle>
+                <p className="text-sm leading-7 text-gray-600">
+                  {vehicle.description}
+                </p>
+              </Section>
+            )}
+
             {/* Specs */}
             <Section>
               <SectionTitle>Caractéristiques</SectionTitle>
@@ -275,7 +370,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             )}
 
             {/* Highlights */}
-            {vehicle.highlights.length > 0 && (
+            {Array.isArray(vehicle.highlights) && vehicle.highlights.length > 0 && (
               <Section>
                 <SectionTitle>Points forts</SectionTitle>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -294,8 +389,26 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
               </Section>
             )}
 
+            {/* Eligibility */}
+            {Array.isArray(vehicle.eligibilityTags) && vehicle.eligibilityTags.length > 0 && (
+              <Section>
+                <SectionTitle>Éligibilités & usages</SectionTitle>
+                <div className="flex flex-wrap gap-2">
+                  {vehicle.eligibilityTags.map(tag => (
+                    <span
+                      key={tag}
+                      className="px-3 py-2 rounded-xl text-sm font-semibold"
+                      style={{ background: "var(--eco-mint-bg)", color: "var(--eco-green)" }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </Section>
+            )}
+
             {/* Services inclus */}
-            {vehicle.includedServices.length > 0 && (
+            {Array.isArray(vehicle.includedServices) && vehicle.includedServices.length > 0 && (
               <Section>
                 <SectionTitle>Services inclus</SectionTitle>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -310,7 +423,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             )}
 
             {/* Conditions de location */}
-            {vehicle.intent !== "sale" && (vehicle.depositAmount || vehicle.includedKmWeekly) && (
+            {vehicle.intent !== "sale" && (vehicle.depositAmount || vehicle.includedKmWeekly || vehicle.rentalMinDuration || vehicle.availabilityNote) && (
               <Section>
                 <SectionTitle>Conditions de location</SectionTitle>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -326,14 +439,18 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                       <span className="font-bold text-gray-900">{vehicle.includedKmWeekly} km/sem</span>
                     </div>
                   )}
-                  <div className="flex flex-col gap-1 p-3 rounded-2xl" style={{ background: "var(--eco-mint-bg)" }}>
-                    <span className="text-xs text-gray-400">Durée min.</span>
-                    <span className="font-bold text-gray-900">1 semaine</span>
-                  </div>
-                  <div className="flex flex-col gap-1 p-3 rounded-2xl" style={{ background: "var(--eco-mint-bg)" }}>
-                    <span className="text-xs text-gray-400">Disponibilité</span>
-                    <span className="font-bold text-gray-900">Sur demande</span>
-                  </div>
+                  {vehicle.rentalMinDuration && (
+                    <div className="flex flex-col gap-1 p-3 rounded-2xl" style={{ background: "var(--eco-mint-bg)" }}>
+                      <span className="text-xs text-gray-400">Durée min.</span>
+                      <span className="font-bold text-gray-900">{vehicle.rentalMinDuration}</span>
+                    </div>
+                  )}
+                  {vehicle.availabilityNote && (
+                    <div className="flex flex-col gap-1 p-3 rounded-2xl" style={{ background: "var(--eco-mint-bg)" }}>
+                      <span className="text-xs text-gray-400">Disponibilité</span>
+                      <span className="font-bold text-gray-900">{vehicle.availabilityNote}</span>
+                    </div>
+                  )}
                 </div>
                 <p className="text-xs text-gray-400 mt-3">
                   * Conditions indicatives. Détails confirmés à la signature du contrat.{" "}
@@ -349,15 +466,8 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 <SectionTitle>Documents nécessaires</SectionTitle>
               </div>
               <ul className="flex flex-col gap-2.5">
-                {[
-                  "Permis de conduire valide",
-                  "Pièce d'identité",
-                  "Justificatif de domicile (- 3 mois)",
-                  "RIB bancaire",
-                  vehicle.isVtcCompatible ? "Carte VTC ou document d'activité" : null,
-                  "KBIS si société",
-                ].filter(Boolean).map(d => (
-                  <li key={d!} className="flex items-center gap-2.5 text-sm text-gray-700">
+                {requiredDocuments.map(d => (
+                  <li key={d} className="flex items-center gap-2.5 text-sm text-gray-700">
                     <span
                       className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
                       style={{ background: "var(--eco-mint-soft)" }}
@@ -391,6 +501,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
                 slug={vehicle.slug}
                 brand={vehicle.brand}
                 model={vehicle.model}
+                intent={vehicle.intent}
                 rentalPrice={vehicle.rentalPriceWeeklyHt}
                 rentalMonthly={vehicle.rentalPriceMonthlyHt}
                 salePrice={vehicle.salePriceTtc}
@@ -399,6 +510,44 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
         </div>
+
+        {/* Simulateur LOA */}
+        {settings.feature_simulator && vehicle.rentalPriceWeeklyHt && (
+          <div className="mt-10 rounded-3xl p-6 border border-blue-100" style={{ background: "linear-gradient(135deg, #EFF7F1 0%, #E8F4FF 100%)" }}>
+            <div className="flex items-start gap-4">
+              <div className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0" style={{ background: "var(--eco-blue)", opacity: 0.12 }} />
+              <div className="flex-1">
+                <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "var(--eco-blue)" }}>Simulateur LOA</p>
+                <h3 className="text-xl font-extrabold mb-1" style={{ color: "var(--eco-black)" }}>
+                  Estimez votre location longue durée
+                </h3>
+                <p className="text-sm text-gray-500 mb-5">
+                  À partir de <strong style={{ color: "var(--eco-green)" }}>{formatPrice(vehicle.rentalPriceWeeklyHt)} HT/sem</strong> pour ce véhicule.
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
+                  {[
+                    { label: "1 semaine", price: vehicle.rentalPriceWeeklyHt, unit: "HT/sem" },
+                    { label: "1 mois", price: vehicle.rentalPriceMonthlyHt ?? Math.round(vehicle.rentalPriceWeeklyHt * 3.8), unit: "HT/mois" },
+                    { label: "3 mois", price: Math.round((vehicle.rentalPriceMonthlyHt ?? vehicle.rentalPriceWeeklyHt * 3.8) * 0.93), unit: "HT/mois" },
+                  ].map(({ label, price: p, unit }) => (
+                    <div key={label} className="bg-white rounded-2xl p-3 text-center border border-gray-100 shadow-sm">
+                      <p className="text-xs text-gray-400 mb-1">{label}</p>
+                      <p className="font-bold text-base" style={{ color: "var(--eco-green)" }}>{formatPrice(p!)}</p>
+                      <p className="text-xs text-gray-400">{unit}</p>
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  href={`/demande?vehicule=${vehicle.slug}&intent=location`}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white"
+                  style={{ background: "var(--eco-green)" }}
+                >
+                  Demander un devis précis <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Similar vehicles */}
         {similar.length > 0 && (

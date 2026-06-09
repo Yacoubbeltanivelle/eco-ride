@@ -4,11 +4,13 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { X, SlidersHorizontal, ChevronDown, Search, LayoutGrid, List } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { vehicles } from "@/data/vehicles";
+import { vehicles as mockVehicles } from "@/data/vehicles";
+import type { Vehicle } from "@/types/vehicle";
 import VehicleCard from "@/components/vehicles/VehicleCard";
 import AdvancedFilterModal from "@/components/catalogue/AdvancedFilterModal";
 import { defaultAdvancedFilters } from "@/components/catalogue/types";
 import type { AdvancedFilters } from "@/components/catalogue/types";
+import { useSettings } from "@/lib/settings-context";
 
 type QuickFilters = {
   search: string;
@@ -24,11 +26,11 @@ const fuelChips = [
   { v: "essence" as const,    l: "Essence" },
 ];
 
-const intentChips = [
-  { v: "" as const,       l: "Tous" },
-  { v: "rental" as const, l: "Location" },
-  { v: "sale" as const,   l: "Vente" },
-];
+const ALL_INTENT_CHIPS = [
+  { v: "" as const,       l: "Tous",     feature: null },
+  { v: "rental" as const, l: "Location", feature: "feature_vtc" },
+  { v: "sale" as const,   l: "Vente",    feature: "feature_occasion" },
+] as const;
 
 const sortOptions = [
   { v: "recommandes", l: "Recommandés" },
@@ -57,6 +59,26 @@ function QuickChip<T extends string>({
 
 function CatalogueContent() {
   const params = useSearchParams();
+  const settings = useSettings();
+
+  const intentChips = ALL_INTENT_CHIPS.filter(
+    c => c.feature === null || settings[c.feature as keyof typeof settings] !== false
+  );
+
+  const [vehicles, setVehicles] = useState<Vehicle[]>(mockVehicles);
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(false);
+
+  const loadVehicles = () => {
+    // TODO_PROD: replace mock fallback with Laravel API once the backend is always available.
+    setLoading(false);
+    setApiError(false);
+    setVehicles(mockVehicles);
+  };
+
+  useEffect(() => {
+    loadVehicles();
+  }, []);
 
   const [quick, setQuick] = useState<QuickFilters>({
     search: params.get("q") || "",
@@ -85,7 +107,13 @@ function CatalogueContent() {
       res = res.filter(v => `${v.brand} ${v.model} ${v.version}`.toLowerCase().includes(q));
     }
     if (quick.intent) res = res.filter(v => v.intent === quick.intent || v.intent === "both");
-    if (quick.fuel)   res = res.filter(v => v.fuel === quick.fuel);
+    if (quick.fuel) {
+      res = res.filter(v =>
+        quick.fuel === "hybride"
+          ? v.fuel === "hybride" || v.fuel === "hybride_rechargeable"
+          : v.fuel === quick.fuel
+      );
+    }
 
     // Advanced filters
     if (advanced.category)     res = res.filter(v => v.category === advanced.category);
@@ -110,7 +138,7 @@ function CatalogueContent() {
     if (sort === "km")        res.sort((a, b) => a.mileageKm - b.mileageKm);
 
     return res;
-  }, [quick, advanced, sort]);
+  }, [vehicles, quick, advanced, sort]);
 
   // Count for the modal preview (uses pendingAdvanced)
   const previewCount = useMemo(() => {
@@ -120,7 +148,13 @@ function CatalogueContent() {
       res = res.filter(v => `${v.brand} ${v.model} ${v.version}`.toLowerCase().includes(q));
     }
     if (quick.intent) res = res.filter(v => v.intent === quick.intent || v.intent === "both");
-    if (quick.fuel)   res = res.filter(v => v.fuel === quick.fuel);
+    if (quick.fuel) {
+      res = res.filter(v =>
+        quick.fuel === "hybride"
+          ? v.fuel === "hybride" || v.fuel === "hybride_rechargeable"
+          : v.fuel === quick.fuel
+      );
+    }
     if (pendingAdvanced.category)     res = res.filter(v => v.category === pendingAdvanced.category);
     if (pendingAdvanced.transmission) res = res.filter(v => v.transmission === pendingAdvanced.transmission);
     if (pendingAdvanced.seats > 0)    res = res.filter(v => v.seats >= pendingAdvanced.seats);
@@ -128,7 +162,7 @@ function CatalogueContent() {
     if (pendingAdvanced.available)    res = res.filter(v => v.status === "available");
     if (pendingAdvanced.kmMax < 300000) res = res.filter(v => v.mileageKm <= pendingAdvanced.kmMax);
     return res.length;
-  }, [quick, pendingAdvanced]);
+  }, [vehicles, quick, pendingAdvanced]);
 
   const resetAll = () => {
     setQuick({ search: "", intent: "", fuel: "" });
@@ -352,15 +386,77 @@ function CatalogueContent() {
 
       {/* Grid */}
       <div className="max-w-7xl mx-auto px-4 pt-5 pb-24">
-        {filtered.length === 0 ? (
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-24 gap-4">
+            <div className="w-10 h-10 rounded-full border-4 border-gray-200 border-t-[var(--eco-green)] animate-spin" />
+            <p className="text-gray-500 text-sm font-medium">Chargement du catalogue…</p>
+          </div>
+        ) : apiError ? (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center py-24 max-w-md mx-auto"
+          >
+            <div className="text-5xl mb-4">🚗</div>
+            <p className="text-gray-800 font-bold text-lg mb-2">Catalogue momentanément indisponible</p>
+            <p className="text-gray-500 text-sm mb-1">
+              Les véhicules mettent plus de temps que prévu à s&apos;afficher.
+            </p>
+            <p className="text-gray-400 text-xs mb-6">
+              Réessayez dans un instant ou envoyez-nous votre besoin, nous vous rappellerons rapidement.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-2">
+              <button
+                onClick={loadVehicles}
+                className="px-5 py-2.5 rounded-full text-white font-semibold text-sm"
+                style={{ background: "var(--eco-green)" }}
+              >
+                Réessayer
+              </button>
+              <a
+                href="/demande"
+                className="px-5 py-2.5 rounded-full bg-white border border-gray-200 text-gray-800 font-semibold text-sm"
+              >
+                Demande rapide
+              </a>
+            </div>
+          </motion.div>
+        ) : filtered.length === 0 && vehicles.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center py-24 max-w-md mx-auto"
+          >
+            <div className="text-5xl mb-4">🚗</div>
+            <p className="text-gray-800 font-bold text-lg mb-2">Nos véhicules arrivent bientôt en ligne</p>
+            <p className="text-gray-500 text-sm mb-1">
+              Le catalogue est en cours de mise à jour.
+            </p>
+            <p className="text-gray-400 text-xs mb-6">
+              Vous pouvez déjà nous envoyer votre besoin, nous vous proposerons les véhicules disponibles.
+            </p>
+            <a
+              href="/demande"
+              className="px-5 py-2.5 rounded-full text-white font-semibold text-sm inline-block"
+              style={{ background: "var(--eco-green)" }}
+            >
+              Faire une demande
+            </a>
+          </motion.div>
+        ) : filtered.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-24"
           >
             <div className="text-5xl mb-4">🔍</div>
-            <p className="text-gray-700 font-semibold text-lg mb-2">Aucun véhicule trouvé</p>
-            <p className="text-gray-500 text-sm mb-6">Essayez de modifier vos filtres</p>
+            <p className="text-gray-800 font-bold text-lg mb-2">Aucun véhicule ne correspond à votre recherche</p>
+            <p className="text-gray-500 text-sm mb-1">
+              Essayez d&apos;élargir votre recherche ou de retirer un filtre.
+            </p>
+            <p className="text-gray-400 text-xs mb-6">
+              Certains véhicules proches de vos critères peuvent aussi être disponibles sur demande.
+            </p>
             <button
               onClick={resetAll}
               className="px-5 py-2.5 rounded-full text-white font-semibold text-sm"

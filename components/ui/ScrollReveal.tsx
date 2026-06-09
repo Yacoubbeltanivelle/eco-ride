@@ -27,8 +27,7 @@ export default function ScrollReveal({ children, delay = 0, direction = "up", cl
   return (
     <motion.div
       initial={initial[direction]}
-      whileInView={animate[direction]}
-      viewport={{ once: true, margin: "-60px" }}
+      animate={animate[direction]}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
       className={className}
     >

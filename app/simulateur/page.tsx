@@ -152,7 +152,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
             animate={{
               scale: i === current ? 1.15 : 1,
               background: i <= current ? "var(--eco-green)" : "rgba(0,0,0,0.08)",
-              color: i <= current ? "white" : "var(--eco-muted, #8A938E)",
+              color: i <= current ? "#ffffff" : "var(--eco-muted, #8A938E)",
             }}
             transition={{ duration: 0.25 }}
             className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0"

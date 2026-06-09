@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Phone, MessageCircle, ChevronRight, MapPin } from "lucide-react";
-import { getFeaturedVehicles } from "@/data/vehicles";
+import { getFeaturedVehicles } from "@/lib/api/vehicles";
 import { testimonials } from "@/data/testimonials";
 import { faqs } from "@/data/faqs";
 import VehicleCard from "@/components/vehicles/VehicleCard";
@@ -15,12 +15,33 @@ import WhyEcoRide from "@/components/ui/WhyEcoRide";
 
 export const metadata: Metadata = {
   title: "ECO RIDE — Location VTC, Vente Occasion & Mandataire | Neuilly-sur-Seine",
-  description: "ECO RIDE : louez un véhicule professionnel, achetez occasion ou commandez en mandataire. Véhicules contrôlés, prix clairs, accompagnement personnalisé.",
+  description: "ECO RIDE à Neuilly-sur-Seine : louez un véhicule VTC, achetez occasion ou commandez en mandataire. Véhicules contrôlés, prix transparents, accompagnement personnalisé. Réponse sous 24h.",
+  keywords: [
+    "location VTC Neuilly-sur-Seine",
+    "voiture occasion 92",
+    "mandataire automobile Île-de-France",
+    "location voiture pro Neuilly",
+    "ECO RIDE",
+    "VTC berline hybride",
+  ],
+  alternates: { canonical: "https://ecoride.pro" },
+  openGraph: {
+    title: "ECO RIDE — Location VTC, Vente Occasion & Mandataire | Neuilly-sur-Seine",
+    description: "Véhicules professionnels en location VTC, vente occasion ou mandataire à Neuilly-sur-Seine. Contrôlés, prix clairs, accompagnement personnalisé.",
+    url: "https://ecoride.pro",
+    type: "website",
+    images: [{
+      url: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&q=80",
+      width: 1200,
+      height: 630,
+      alt: "ECO RIDE — Véhicules premium Neuilly-sur-Seine",
+    }],
+  },
 };
 
 
-export default function HomePage() {
-  const featured = getFeaturedVehicles();
+export default async function HomePage() {
+  const featured = await getFeaturedVehicles();
 
   return (
     <div style={{ background: "var(--eco-mint-bg)" }}>
@@ -38,7 +59,7 @@ export default function HomePage() {
             priority
             className="object-cover"
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,7,6,0.92) 0%, rgba(5,7,6,0.50) 45%, rgba(5,7,6,0.35) 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,7,6,0.78) 0%, rgba(5,7,6,0.36) 48%, rgba(5,7,6,0.20) 100%)" }} />
         </div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pb-16 pt-28">

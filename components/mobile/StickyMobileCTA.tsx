@@ -5,9 +5,10 @@ interface Props {
   variant?: "default" | "vehicle" | "location";
   vehicleLabel?: string;
   price?: string;
+  demandeHref?: string;
 }
 
-export default function StickyMobileCTA({ vehicleLabel, price }: Props) {
+export default function StickyMobileCTA({ vehicleLabel, price, demandeHref = "/demande" }: Props) {
   const waMessage = vehicleLabel
     ? `Bonjour, je suis intéressé par le véhicule : ${vehicleLabel}. Pouvez-vous me recontacter ?`
     : "Bonjour, je souhaite des informations sur vos véhicules.";
@@ -42,7 +43,7 @@ export default function StickyMobileCTA({ vehicleLabel, price }: Props) {
             <MessageCircle className="w-4 h-4" /> WhatsApp
           </a>
           <a
-            href="/demande"
+            href={demandeHref}
             className="flex-1 flex items-center justify-center gap-1.5 rounded-xl py-3 text-sm font-bold cursor-pointer transition-opacity hover:opacity-90"
             style={{ background: "var(--eco-green)", color: "white" }}
           >

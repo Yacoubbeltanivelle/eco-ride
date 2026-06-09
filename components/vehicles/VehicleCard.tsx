@@ -2,10 +2,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Zap, Gauge, Calendar, ArrowRight, ChevronLeft, ChevronRight, Heart, MapPin } from "lucide-react";
+import { Zap, Gauge, Calendar, ArrowRight, ChevronLeft, ChevronRight, Heart, MapPin, GitCompareArrows } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Vehicle } from "@/types/vehicle";
 import { cn, fuelLabels, fuelColors, statusLabels, statusColors, formatPrice, formatMileage } from "@/lib/utils";
+import { useSettings } from "@/lib/settings-context";
 
 interface Props {
   vehicle: Vehicle;
@@ -14,11 +15,15 @@ interface Props {
 }
 
 export default function VehicleCard({ vehicle, index = 0, listView = false }: Props) {
-  const images = vehicle.images.slice(0, 3);
+  const images = (Array.isArray(vehicle.images) && vehicle.images.length > 0
+    ? vehicle.images
+    : ["https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&q=80"]
+  ).slice(0, 3);
   const [imgIdx, setImgIdx] = useState(0);
   const [imgDir, setImgDir] = useState<1 | -1>(1);
   const [hovered, setHovered] = useState(false);
   const [liked, setLiked] = useState(false);
+  const { feature_comparator } = useSettings();
 
   const nextImg = (e: React.MouseEvent) => { e.preventDefault(); setImgDir(1); setImgIdx(i => (i + 1) % images.length); };
   const prevImg = (e: React.MouseEvent) => { e.preventDefault(); setImgDir(-1); setImgIdx(i => (i - 1 + images.length) % images.length); };
@@ -39,6 +44,7 @@ export default function VehicleCard({ vehicle, index = 0, listView = false }: Pr
             fill
             className="object-cover"
             sizes="200px"
+            priority={index < 6}
           />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to right, transparent 60%, rgba(0,0,0,0.08))" }} />
           {/* Status badge */}
@@ -90,13 +96,25 @@ export default function VehicleCard({ vehicle, index = 0, listView = false }: Pr
                 </p>
               )}
             </div>
-            <Link
-              href={`/vehicules/${vehicle.slug}`}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold text-white transition-transform active:scale-95"
-              style={{ background: "var(--eco-green)" }}
-            >
-              Voir <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            <div className="flex items-center gap-2">
+              {feature_comparator !== false && (
+                <button
+                  type="button"
+                  onClick={e => e.preventDefault()}
+                  title="Comparer"
+                  className="w-8 h-8 rounded-xl flex items-center justify-center border border-gray-200 text-gray-400 hover:border-sky-400 hover:text-sky-500 transition-colors"
+                >
+                  <GitCompareArrows className="w-3.5 h-3.5" />
+                </button>
+              )}
+              <Link
+                href={`/vehicules/${vehicle.slug}`}
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold text-white transition-transform active:scale-95"
+                style={{ background: "var(--eco-green)" }}
+              >
+                Voir <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -131,6 +149,7 @@ export default function VehicleCard({ vehicle, index = 0, listView = false }: Pr
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-700"
               sizes="(max-width: 768px) 100vw, 50vw"
+              priority={index < 6}
             />
           </motion.div>
         </AnimatePresence>
@@ -273,13 +292,25 @@ export default function VehicleCard({ vehicle, index = 0, listView = false }: Pr
               </p>
             )}
           </div>
-          <Link
-            href={`/vehicules/${vehicle.slug}`}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold text-white transition-transform active:scale-95 hover:opacity-90"
-            style={{ background: "var(--eco-green)" }}
-          >
-            Voir <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="flex items-center gap-2">
+            {feature_comparator !== false && (
+              <button
+                type="button"
+                onClick={e => e.preventDefault()}
+                title="Comparer ce véhicule"
+                className="w-9 h-9 rounded-xl flex items-center justify-center border border-gray-200 text-gray-400 hover:border-sky-400 hover:text-sky-500 transition-colors"
+              >
+                <GitCompareArrows className="w-4 h-4" />
+              </button>
+            )}
+            <Link
+              href={`/vehicules/${vehicle.slug}`}
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold text-white transition-transform active:scale-95 hover:opacity-90"
+              style={{ background: "var(--eco-green)" }}
+            >
+              Voir <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
       </div>
     </motion.div>

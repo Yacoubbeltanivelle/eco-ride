@@ -1,5 +1,5 @@
 export type AdvancedFilters = {
-  category: "" | "berline" | "suv" | "citadine" | "van" | "electrique" | "hybride";
+  category: "" | "berline" | "suv" | "break" | "citadine" | "hybride" | "electrique" | "utilitaire" | "premium";
   transmission: "" | "automatique" | "manuelle";
   seats: number;
   critair: "" | "1" | "2" | "E";
@@ -21,7 +21,7 @@ export const defaultAdvancedFilters: AdvancedFilters = {
   priceMax: 1500,
   kmMax: 300000,
   yearMin: 2010,
-  yearMax: 2025,
+  yearMax: 2026,
   vtc: false,
   available: false,
 };

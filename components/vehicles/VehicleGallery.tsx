@@ -9,7 +9,8 @@ interface Props {
   alt: string;
 }
 
-export default function VehicleGallery({ images, alt }: Props) {
+export default function VehicleGallery({ images: rawImages, alt }: Props) {
+  const images = Array.isArray(rawImages) ? rawImages : [];
   const [current, setCurrent] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
   const [lightbox, setLightbox] = useState(false);
@@ -41,7 +42,8 @@ export default function VehicleGallery({ images, alt }: Props) {
                 alt={`${alt} — photo ${current + 1}`}
                 fill
                 className="object-cover"
-                priority={current === 0}
+                sizes="(max-width: 1024px) 100vw, 66vw"
+                priority
               />
             </motion.div>
           </AnimatePresence>
@@ -96,7 +98,7 @@ export default function VehicleGallery({ images, alt }: Props) {
                   opacity: i === current ? 1 : 0.55,
                 }}
               >
-                <Image src={src} alt={`Vue ${i + 1}`} fill className="object-cover" />
+                <Image src={src} alt={`Vue ${i + 1}`} fill className="object-cover" sizes="80px" />
               </button>
             ))}
           </div>
@@ -121,7 +123,7 @@ export default function VehicleGallery({ images, alt }: Props) {
               onClick={e => e.stopPropagation()}
               className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden"
             >
-              <Image src={images[current]} alt={alt} fill className="object-cover" />
+              <Image src={images[current]} alt={alt} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 896px" />
             </motion.div>
             <button
               onClick={() => setLightbox(false)}
