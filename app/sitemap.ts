@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
 import { getAllVehicles } from "@/lib/api/vehicles";
 
-export const dynamic = "force-dynamic";
+// TODO_PROD: repasser en force-dynamic quand l'API Laravel sera publique
+// (force-dynamic est incompatible avec l'export statique GitHub Pages)
+export const dynamic = "force-static";
 
 const BASE = "https://ecoride.pro";
 
